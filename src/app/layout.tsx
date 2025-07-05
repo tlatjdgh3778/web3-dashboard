@@ -6,6 +6,7 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 import WalletGuard from "@/components/common/WalletGuard";
 import { geistMono, geistSans } from "./ui/fonts";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RootLayout({
 	children,
@@ -27,6 +28,7 @@ export default function RootLayout({
 					<div className="min-h-screen flex flex-col">
 						<Header />
 						<main className="flex flex-1">
+							<Toaster position="top-right" />
 							<WalletGuard>{children}</WalletGuard>
 						</main>
 					</div>
