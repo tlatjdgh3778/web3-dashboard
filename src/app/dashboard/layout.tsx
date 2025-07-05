@@ -40,6 +40,7 @@ export default function DashboardLayout({
 							className="text-muted-foreground cursor-pointer"
 							size="icon"
 							onClick={() => handleCopyAddress(address ?? "")}
+							asChild
 						>
 							<Copy className="w-4 h-4" />
 						</Button>
