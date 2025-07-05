@@ -3,7 +3,6 @@
 
 echo "Running Biome format..."
 pnpm biome format --write .
-git add .
 
 echo "Running Biome check..."
 pnpm biome check .
