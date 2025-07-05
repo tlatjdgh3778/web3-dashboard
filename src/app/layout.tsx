@@ -1,18 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+"use client";
+
 import LayoutProvider from "@/components/common/LayoutProvider";
 
 import "./globals.css";
 import Header from "@/components/common/Header";
-
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
+import WalletGuard from "@/components/common/WalletGuard";
+import { geistMono, geistSans } from "./ui/fonts";
 
 export default function RootLayout({
 	children,
@@ -22,11 +15,15 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
 			>
 				<LayoutProvider>
-					<Header />
-					{children}
+					<div className="min-h-screen flex flex-col">
+						<Header />
+						<main className="flex flex-1">
+							<WalletGuard>{children}</WalletGuard>
+						</main>
+					</div>
 				</LayoutProvider>
 			</body>
 		</html>
