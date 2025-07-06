@@ -3,10 +3,7 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Wallet } from "lucide-react";
 import GasTracker from "./GasTracker";
-
-const slow = 0.283199859;
-const standard = 0.303199859;
-const fast = 0.323199859;
+import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
 
 export default function WalletNotConnected() {
 	// const { data: ethGasPrice } = useGetEthGasPrice();
@@ -48,7 +45,11 @@ export default function WalletNotConnected() {
 							Live Gas Tracker
 						</h2>
 
-						<GasTracker slow={slow} standard={standard} fast={fast} />
+						<GasTracker
+							slow={mockEthGasPrice.slow}
+							standard={mockEthGasPrice.standard}
+							fast={mockEthGasPrice.fast}
+						/>
 					</div>
 				</div>
 			</div>
