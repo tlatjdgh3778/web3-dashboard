@@ -19,7 +19,7 @@ interface ERC20Token {
 	total_supply: string | null;
 	total_supply_formatted: string | null;
 	percentage_relative_to_total_supply: number | null;
-	security_score: number;
+	security_score: number | null;
 	balance_formatted: string;
 	usd_price: number;
 	usd_price_24hr_percent_change: number;
