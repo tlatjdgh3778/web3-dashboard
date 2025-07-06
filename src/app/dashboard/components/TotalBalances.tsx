@@ -35,6 +35,10 @@ export default function TotalBalances({
 		totalBalance > 0 ? (totalChange24h / totalBalance) * 100 : 0;
 	const isPositive = totalChange24h >= 0;
 
+	const top3Holdings = data.result
+		.sort((a, b) => b.usd_value - a.usd_value)
+		.slice(0, 3);
+
 	return (
 		<div className="space-y-6">
 			{/* main balance */}
@@ -78,7 +82,7 @@ export default function TotalBalances({
 					Top 3 Holdings
 				</div>
 				<div className="space-y-1">
-					{data.result.slice(0, 3).map((token) => (
+					{top3Holdings.map((token) => (
 						<div
 							key={token.symbol}
 							className="flex items-center justify-between py-1"
