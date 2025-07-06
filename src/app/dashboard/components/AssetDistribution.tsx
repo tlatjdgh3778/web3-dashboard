@@ -10,7 +10,7 @@ import AssetChartLegend from "./AssetChartLegend";
 import AssetChartTooltip from "./AssetChartTooltip";
 
 interface AssetDistributionProps {
-	data: ERC20TokenResponse;
+	data: ERC20TokenResponse | undefined;
 	isLoading: boolean;
 }
 
@@ -21,9 +21,12 @@ export default function AssetDistribution({
 	if (isLoading) {
 		return <Skeleton className="h-[300px] w-full rounded-lg" />;
 	}
+	if (!data) {
+		return <div>No data</div>;
+	}
 
 	// chart data
-	const chartData = data.result.map((token, index) => ({
+	const chartData = data.result?.map((token, index) => ({
 		name: token.symbol,
 		fullName: token.name,
 		value: token.portfolio_percentage,
@@ -31,14 +34,14 @@ export default function AssetDistribution({
 		balance: token.balance_formatted,
 		price: token.usd_price,
 		priceChange: token.usd_price_24hr_percent_change,
-		fill: getTokenColor(token.symbol, index),
+		fill: getTokenColor(token.symbol || "", index),
 	}));
 
 	// chart config
-	const chartConfig = data.result.reduce((config, token, index) => {
-		config[token.symbol] = {
-			label: token.symbol,
-			color: getTokenColor(token.symbol, index),
+	const chartConfig = data.result?.reduce((config, token, index) => {
+		config[token.symbol || ""] = {
+			label: token.symbol || "",
+			color: getTokenColor(token.symbol || "", index),
 		};
 		return config;
 	}, {} as ChartConfig);

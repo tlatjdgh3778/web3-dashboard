@@ -8,7 +8,7 @@ export default function TotalBalances({
 	data,
 	isLoading,
 }: {
-	data: ERC20TokenResponse;
+	data: ERC20TokenResponse | undefined;
 	isLoading: boolean;
 }) {
 	if (isLoading) {
@@ -21,6 +21,10 @@ export default function TotalBalances({
 				</div>
 			</div>
 		);
+	}
+
+	if (!data) {
+		return <div>No data</div>;
 	}
 
 	const totalBalance = data.result.reduce((acc, token) => {
@@ -36,7 +40,7 @@ export default function TotalBalances({
 	const isPositive = totalChange24h >= 0;
 
 	const top3Holdings = data.result
-		.sort((a, b) => b.usd_value - a.usd_value)
+		.sort((a, b) => (b.usd_value || 0) - (a.usd_value || 0))
 		.slice(0, 3);
 
 	return (
@@ -88,15 +92,15 @@ export default function TotalBalances({
 							className="flex items-center justify-between py-1"
 						>
 							<div className="flex items-center gap-2">
-								<TokenAvatar src={token.thumbnail} />
+								<TokenAvatar src={token.thumbnail || ""} />
 								<span className="text-sm font-medium">{token.symbol}</span>
 							</div>
 							<div className="text-right">
 								<div className="text-sm font-medium">
-									${token.usd_value.toFixed(2)}
+									${token.usd_value?.toFixed(2) || 0}
 								</div>
 								<div className="text-xs text-muted-foreground">
-									{token.portfolio_percentage.toFixed(1)}%
+									{token.portfolio_percentage?.toFixed(1) || 0}%
 								</div>
 							</div>
 						</div>
