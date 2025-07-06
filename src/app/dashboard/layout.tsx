@@ -27,7 +27,7 @@ export default function DashboardLayout({
 
 	return (
 		<div className="flex flex-col flex-1 gap-4 py-4 px-16">
-			<h1 className="text-2xl font-bold">Portfolio Dashboard</h1>
+			<h1 className="text-2xl font-bold">Dashboard</h1>
 			<div className="flex items-center gap-2">
 				<p>shim.eth </p>
 				<Badge variant="outline">
