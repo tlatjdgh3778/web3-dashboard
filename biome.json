@@ -12,7 +12,8 @@
 			"src/**/*.tsx",
 			"src/**/*.js",
 			"src/**/*.jsx",
-			"*.json"
+			"*.json",
+			"!src/components/ui/**/*"
 		]
 	},
 	"formatter": {
