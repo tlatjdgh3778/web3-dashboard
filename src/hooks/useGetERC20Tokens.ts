@@ -1,8 +1,9 @@
+import type { ERC20TokenResponse } from "@/types/ERC20Token";
 import { useQuery } from "@tanstack/react-query";
 
 const MORALIS_API_KEY = process.env.NEXT_PUBLIC_MORALIS_API_KEY;
 
-async function fetchERC20Tokens(address: string) {
+async function fetchERC20Tokens(address: string): Promise<ERC20TokenResponse> {
 	const res = await fetch(
 		`https://deep-index.moralis.io/api/v2.2/${address}/erc20`,
 		{
