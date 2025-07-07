@@ -8,8 +8,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
 import { mockErc20Tokens } from "@/mock/data/mockErc20Tokens";
 
-import TotalBalances from "./components/TotalBalances";
-import AssetDistribution from "./components/AssetDistribution";
+import TotalBalances from "./components/total-balances/TotalBalances";
+import AssetDistribution from "./components/asset-distribution/AssetDistribution";
+import RecentTransaction from "./components/recent-transactions/RecentTransaction";
 // import { useGetERC20Tokens } from "@/hooks/useGetERC20Tokens";
 
 export default function DashboardPage() {
@@ -59,8 +60,8 @@ export default function DashboardPage() {
 
 			{/* 추가 섹션을 위한 공간 */}
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-				{/* 향후 추가될 컴포넌트들을 위한 공간 */}
-				Recent Transactions
+				{/* Recent Transactions */}
+				<RecentTransaction />
 			</div>
 		</div>
 	);
