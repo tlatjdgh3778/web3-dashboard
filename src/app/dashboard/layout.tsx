@@ -2,7 +2,7 @@
 
 import { useAccount } from "wagmi";
 
-import AddressInfo from "@/components/common/AddressInfo";
+import AddressInfo from "@/components/common/address-info";
 
 export default function DashboardLayout({
 	children,

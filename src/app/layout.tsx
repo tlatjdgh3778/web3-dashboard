@@ -1,10 +1,10 @@
 "use client";
 
-import LayoutProvider from "@/components/common/LayoutProvider";
+import LayoutProvider from "@/components/common/layout-provider";
 
 import "./globals.css";
-import Header from "@/components/common/Header";
-import WalletGuard from "@/components/common/WalletGuard";
+import Header from "@/components/common/header";
+import WalletGuard from "@/components/common/wallet-guard";
 import { geistMono, geistSans } from "./ui/fonts";
 import { Toaster } from "@/components/ui/sonner";
 

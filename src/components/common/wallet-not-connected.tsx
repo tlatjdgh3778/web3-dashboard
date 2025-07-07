@@ -5,7 +5,7 @@ import { Wallet } from "lucide-react";
 
 import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
 
-import GasTracker from "./GasTracker";
+import GasTracker from "./gas-tracker";
 
 export default function WalletNotConnected() {
 	return (

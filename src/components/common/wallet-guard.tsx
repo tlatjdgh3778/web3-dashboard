@@ -1,6 +1,6 @@
 import { useAccount } from "wagmi";
 
-import WalletNotConnected from "./WalletNotConnected";
+import WalletNotConnected from "./wallet-not-connected";
 
 export default function WalletGuard({
 	children,

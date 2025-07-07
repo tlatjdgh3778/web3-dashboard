@@ -2,7 +2,7 @@
 
 import { useAccount } from "wagmi";
 
-import GasTracker from "@/components/common/GasTracker";
+import GasTracker from "@/components/common/gas-tracker";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
@@ -10,7 +10,7 @@ import { mockErc20Tokens } from "@/mock/data/mockErc20Tokens";
 
 import TotalBalances from "./components/total-balances/TotalBalances";
 import AssetDistribution from "./components/asset-distribution/AssetDistribution";
-import RecentTransaction from "./components/recent-transactions/RecentTransaction";
+import RecentTransaction from "./components/recent-transactions/recent-transaction";
 // import { useGetERC20Tokens } from "@/hooks/useGetERC20Tokens";
 
 export default function DashboardPage() {
