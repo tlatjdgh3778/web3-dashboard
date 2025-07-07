@@ -2,7 +2,7 @@ import { TrendingUp, TrendingDown, DollarSign } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import type { ERC20TokenResponse } from "@/types/ERC20Token";
-import TokenAvatar from "@/components/common/TokenAvatar";
+import TokenAvatar from "@/components/common/token-avatar";
 
 export default function TotalBalances({
 	data,

@@ -6,8 +6,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import type { ERC20TokenResponse } from "@/types/ERC20Token";
 import { getTokenColor } from "@/utils/getTokenColor";
 
-import AssetChartLegend from "./AssetChartLegend";
-import AssetChartTooltip from "./AssetChartTooltip";
+import AssetChartLegend from "./asset-chart-legend";
+import AssetChartTooltip from "./asset-chart-tooltip";
 
 interface AssetDistributionProps {
 	data: ERC20TokenResponse | undefined;
