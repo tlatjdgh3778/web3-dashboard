@@ -14,7 +14,7 @@ export default function CopyButton({ text }: CopyButtonProps) {
 		try {
 			await navigator.clipboard.writeText(text);
 			setCopied(true);
-			toast.success("Transaction hash copied to clipboard!");
+			toast.success(`${text} copied to clipboard!`);
 
 			setTimeout(() => setCopied(false), 2000);
 		} catch (error) {
