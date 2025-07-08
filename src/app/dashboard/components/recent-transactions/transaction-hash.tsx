@@ -49,7 +49,6 @@ export function TransactionHash({
 					</TooltipTrigger>
 					<TooltipContent>
 						<p className="font-mono text-xs">{hash}</p>
-						<p className="text-xs text-muted-foreground mt-1">Click to copy</p>
 					</TooltipContent>
 				</Tooltip>
 
