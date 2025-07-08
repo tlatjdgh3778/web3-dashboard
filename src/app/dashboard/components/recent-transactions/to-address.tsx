@@ -12,21 +12,21 @@ import {
 import CopyButton from "@/components/common/copy-button";
 import ViewEtherscan from "@/components/common/view-etherscan";
 
-interface FromAddressProps {
-	from_address: string;
-	from_address_label?: string;
+interface ToAddressProps {
+	to_address: string;
+	to_address_label?: string;
 	isCurrentWallet?: boolean;
 }
 
-export default function FromAddress({
-	from_address,
-	from_address_label,
+export default function ToAddress({
+	to_address,
+	to_address_label,
 	isCurrentWallet = false,
-}: FromAddressProps) {
+}: ToAddressProps) {
 	const displayAddress =
-		from_address_label ||
-		(from_address
-			? `${from_address.slice(0, 6)}...${from_address.slice(-4)}`
+		to_address_label ||
+		(to_address
+			? `${to_address.slice(0, 6)}...${to_address.slice(-4)}`
 			: "N/A");
 
 	return (
@@ -44,13 +44,13 @@ export default function FromAddress({
 						</Badge>
 					</TooltipTrigger>
 					<TooltipContent>
-						<p className="font-mono text-xs">{from_address}</p>
+						<p className="font-mono text-xs">{to_address}</p>
 					</TooltipContent>
 				</Tooltip>
 
 				<div className="flex items-center gap-1">
-					<CopyButton text={from_address} />
-					<ViewEtherscan hash={from_address} />
+					<CopyButton text={to_address} />
+					<ViewEtherscan hash={to_address} />
 				</div>
 			</div>
 		</TooltipProvider>
