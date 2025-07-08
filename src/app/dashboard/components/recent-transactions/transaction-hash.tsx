@@ -1,9 +1,7 @@
 "use client";
 
-import { ExternalLink, Hash } from "lucide-react";
-import { toast } from "sonner";
+import { Hash } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
 	Tooltip,
@@ -12,6 +10,7 @@ import {
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import CopyButton from "@/components/common/copy-button";
+import ViewEtherscan from "@/components/common/view-etherscan";
 
 interface TransactionHashProps {
 	hash: string;
@@ -27,11 +26,6 @@ export function TransactionHash({
 	// display hash in short form (0x1234...abcd)
 	const shortHash = `${hash.slice(0, 6)}...${hash.slice(-4)}`;
 	const displayHash = showFullHash ? hash : shortHash;
-
-	const handleViewOnEtherscan = () => {
-		window.open(`https://etherscan.io/tx/${hash}`, "_blank");
-		toast.info("Opening transaction on Etherscan...");
-	};
 
 	return (
 		<TooltipProvider>
@@ -55,22 +49,7 @@ export function TransactionHash({
 				{/* action buttons */}
 				<div className="flex items-center gap-1">
 					<CopyButton text={hash} />
-					{/* etherscan link */}
-					<Tooltip>
-						<TooltipTrigger asChild>
-							<Button
-								variant="ghost"
-								size="sm"
-								className="h-6 w-6 p-0 hover:bg-muted cursor-pointer"
-								onClick={handleViewOnEtherscan}
-							>
-								<ExternalLink className="h-3 w-3" />
-							</Button>
-						</TooltipTrigger>
-						<TooltipContent>
-							<p>View on Etherscan</p>
-						</TooltipContent>
-					</Tooltip>
+					<ViewEtherscan hash={hash} />
 				</div>
 			</div>
 		</TooltipProvider>
