@@ -8,12 +8,17 @@ import WalletGuard from "@/components/common/wallet-guard";
 import { geistMono, geistSans } from "./ui/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { initMSW } from "@/mock";
 
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	if (process.env.NODE_ENV !== "production") {
+		initMSW();
+	}
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
