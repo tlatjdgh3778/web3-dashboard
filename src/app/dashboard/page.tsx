@@ -10,16 +10,23 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-
 import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
+import { mockTotalBalance } from "@/mock/data/mockTotalBalances";
 
-// import { useGetERC20Tokens } from "@/hooks/useGetERC20Tokens";
+import TotalBalances from "./components/total-balances/total-balances";
 
 export default function DashboardPage() {
 	const { address } = useAccount();
-
-	// const { data: tokens, isLoading } = useGetERC20Tokens(address as string);
 	console.log(address);
+
+	// const { data: tokens, isLoading } = useGetTokensForOwner({
+	// 	4eraddress: address as string,
+	// });
+	// const { data: balance, isLoading } = useGetBalance({
+	// 	address: address as string,
+	// });
+
+	const walletBalances = mockTotalBalance;
 
 	return (
 		<div className="flex flex-col flex-1 space-y-6">
@@ -30,8 +37,7 @@ export default function DashboardPage() {
 						<CardTitle className="text-xl">Total Balances</CardTitle>
 					</CardHeader>
 					<CardContent>
-						Total Balances
-						{/* <TotalBalances data={tokens} isLoading={false} /> */}
+						<TotalBalances walletBalances={walletBalances} isLoading={false} />
 					</CardContent>
 				</Card>
 

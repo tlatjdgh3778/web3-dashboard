@@ -1,16 +1,33 @@
 import { TrendingUp, TrendingDown, DollarSign } from "lucide-react";
+import type { OwnedToken } from "alchemy-sdk";
 
 import { Skeleton } from "@/components/ui/skeleton";
-import type { ERC20TokenResponse } from "@/types/ERC20Token";
 import TokenAvatar from "@/components/common/token-avatar";
+import { mockTokenPrice } from "@/mock/data/mockTokenPrice";
 
 export default function TotalBalances({
-	data,
+	walletBalances,
 	isLoading,
 }: {
-	data: ERC20TokenResponse | undefined;
+	walletBalances: OwnedToken[] | undefined;
 	isLoading: boolean;
 }) {
+	if (!walletBalances) {
+		return <div>No data</div>;
+	}
+
+	const symbols = walletBalances
+		.map((token) => token.symbol)
+		.filter(Boolean) as string[];
+
+	console.log(symbols);
+
+	// const { data: tokenQuotes, isLoading: isTokenQuotesLoading } =
+	// 	useGetTokenPrice({
+	// 		symbols,
+	// 	});
+	const tokenPriceData = mockTokenPrice;
+
 	if (isLoading) {
 		return (
 			<div className="space-y-4">
@@ -23,24 +40,52 @@ export default function TotalBalances({
 		);
 	}
 
-	if (!data) {
-		return <div>No data</div>;
-	}
+	/**
+	 * Process the data to get the token prices
+	 */
+	const tokenPrices = walletBalances.map((token) => {
+		const tokenPrice =
+			tokenPriceData[
+				token.symbol?.toLocaleLowerCase() as keyof typeof tokenPriceData
+			];
+		return {
+			usdValue: tokenPrice.usd * Number(token.balance),
+			balance: token.balance,
+			symbol: token.symbol,
+			name: token.name,
+			logo: token.logo,
+			usd_24h_change: tokenPrice.usd_24h_change,
+			usd_24h_vol: tokenPrice.usd_24h_vol,
+			usd_market_cap: tokenPrice.usd_market_cap,
+		};
+	});
 
-	const totalBalance = data.result.reduce((acc, token) => {
-		return acc + Number(token.usd_value);
+	/**
+	 * Calculate the total balance
+	 */
+	const totalBalance = tokenPrices.reduce((acc, token) => {
+		return acc + token.usdValue;
 	}, 0);
 
-	const totalChange24h = data.result.reduce((acc, token) => {
-		return acc + (token.usd_value_24hr_usd_change || 0);
+	/**
+	 * Calculate the total change in 24 hours
+	 */
+	const totalChange24h = tokenPrices.reduce((acc, token) => {
+		return acc + (token.usd_24h_change || 0) * Number(token.balance);
 	}, 0);
 
+	/**
+	 * Calculate the change percentage
+	 */
 	const changePercentage =
 		totalBalance > 0 ? (totalChange24h / totalBalance) * 100 : 0;
 	const isPositive = totalChange24h >= 0;
 
-	const top3Holdings = data.result
-		.sort((a, b) => (b.usd_value || 0) - (a.usd_value || 0))
+	/**
+	 * Get the top 3 holdings
+	 */
+	const top3Holdings = tokenPrices
+		.sort((a, b) => (b.usdValue || 0) - (a.usdValue || 0))
 		.slice(0, 3);
 
 	return (
@@ -92,15 +137,15 @@ export default function TotalBalances({
 							className="flex items-center justify-between py-1"
 						>
 							<div className="flex items-center gap-2">
-								<TokenAvatar src={token.thumbnail || ""} />
+								<TokenAvatar src={token.logo || ""} />
 								<span className="text-sm font-medium">{token.symbol}</span>
 							</div>
 							<div className="text-right">
 								<div className="text-sm font-medium">
-									${token.usd_value?.toFixed(2) || 0}
+									${token.usdValue?.toFixed(2) || 0}
 								</div>
 								<div className="text-xs text-muted-foreground">
-									{token.portfolio_percentage?.toFixed(1) || 0}%
+									{((token.usdValue / totalBalance) * 100).toFixed(2) || 0}%
 								</div>
 							</div>
 						</div>
