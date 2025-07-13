@@ -4,6 +4,8 @@ import type { OwnedToken } from "alchemy-sdk";
 import { Skeleton } from "@/components/ui/skeleton";
 import TokenAvatar from "@/components/common/token-avatar";
 import { mockTokenPrice } from "@/mock/data/mockTokenPrice";
+import { getTotalWalletBalance } from "@/utils/getTotalWalletBalance";
+import { getTokenPrices } from "@/utils/getTokenPrices";
 
 export default function TotalBalances({
 	walletBalances,
@@ -43,29 +45,15 @@ export default function TotalBalances({
 	/**
 	 * Process the data to get the token prices
 	 */
-	const tokenPrices = walletBalances.map((token) => {
-		const tokenPrice =
-			tokenPriceData[
-				token.symbol?.toLocaleLowerCase() as keyof typeof tokenPriceData
-			];
-		return {
-			usdValue: tokenPrice.usd * Number(token.balance),
-			balance: token.balance,
-			symbol: token.symbol,
-			name: token.name,
-			logo: token.logo,
-			usd_24h_change: tokenPrice.usd_24h_change,
-			usd_24h_vol: tokenPrice.usd_24h_vol,
-			usd_market_cap: tokenPrice.usd_market_cap,
-		};
+	const tokenPrices = getTokenPrices({
+		walletBalances,
+		tokenPriceData,
 	});
 
 	/**
 	 * Calculate the total balance
 	 */
-	const totalBalance = tokenPrices.reduce((acc, token) => {
-		return acc + token.usdValue;
-	}, 0);
+	const totalBalance = getTotalWalletBalance({ walletBalances: tokenPrices });
 
 	/**
 	 * Calculate the total change in 24 hours

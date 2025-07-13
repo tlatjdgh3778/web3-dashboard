@@ -14,6 +14,7 @@ import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
 import { mockTotalBalance } from "@/mock/data/mockTotalBalances";
 
 import TotalBalances from "./components/total-balances/total-balances";
+import AssetDistribution from "./components/asset-distribution/asset-distribution";
 
 export default function DashboardPage() {
 	const { address } = useAccount();
@@ -61,8 +62,10 @@ export default function DashboardPage() {
 						<CardTitle className="text-xl">Asset Distribution</CardTitle>
 					</CardHeader>
 					<CardContent className="pt-0">
-						Asset Distribution
-						{/* <AssetDistribution data={tokens} isLoading={false} /> */}
+						<AssetDistribution
+							walletBalances={walletBalances}
+							isLoading={false}
+						/>
 					</CardContent>
 				</Card>
 			</div>
