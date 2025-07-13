@@ -1,4 +1,6 @@
-export const mockTokenPrice = {
+import type { TokenPrice } from "@/types/TokenPrice";
+
+export const mockTokenPrice: TokenPrice = {
 	eth: {
 		usd: 2953.59,
 		usd_market_cap: 356286731912.2218,
