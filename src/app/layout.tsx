@@ -8,17 +8,13 @@ import WalletGuard from "@/components/common/wallet-guard";
 import { geistMono, geistSans } from "./ui/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { initMSW } from "@/mock";
+import { QueryProvider } from "@/components/providers/query-provider";
 
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	if (process.env.NODE_ENV !== "production") {
-		initMSW();
-	}
-
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head>
@@ -36,15 +32,17 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<LayoutProvider>
-						<div className="min-h-screen flex flex-col">
-							<Header />
-							<main className="flex flex-1">
-								<Toaster position="top-right" />
-								<WalletGuard>{children}</WalletGuard>
-							</main>
-						</div>
-					</LayoutProvider>
+					<QueryProvider>
+						<LayoutProvider>
+							<div className="min-h-screen flex flex-col">
+								<Header />
+								<main className="flex flex-1">
+									<Toaster position="top-right" />
+									<WalletGuard>{children}</WalletGuard>
+								</main>
+							</div>
+						</LayoutProvider>
+					</QueryProvider>
 				</ThemeProvider>
 			</body>
 		</html>
