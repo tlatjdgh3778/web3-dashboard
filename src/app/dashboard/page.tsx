@@ -15,6 +15,7 @@ import { mockTotalBalance } from "@/mock/data/mockTotalBalances";
 
 import TotalBalances from "./components/total-balances/total-balances";
 import AssetDistribution from "./components/asset-distribution/asset-distribution";
+import RecentTransactions from "./components/recent-transactions/recent-transactions";
 
 export default function DashboardPage() {
 	const { address } = useAccount();
@@ -73,7 +74,9 @@ export default function DashboardPage() {
 					<CardTitle className="text-xl">Recent Transactions</CardTitle>
 					<CardDescription>Your latest 5 transactions</CardDescription>
 				</CardHeader>
-				<CardContent className="pt-0">Recent Transactions</CardContent>
+				<CardContent className="pt-0">
+					<RecentTransactions />
+				</CardContent>
 			</Card>
 		</div>
 	);

@@ -14,20 +14,12 @@ import ViewEtherscan from "@/components/common/view-etherscan";
 
 interface ToAddressProps {
 	to_address: string;
-	to_address_label?: string;
-	isCurrentWallet?: boolean;
 }
 
-export default function ToAddress({
-	to_address,
-	to_address_label,
-	isCurrentWallet = false,
-}: ToAddressProps) {
-	const displayAddress =
-		to_address_label ||
-		(to_address
-			? `${to_address.slice(0, 6)}...${to_address.slice(-4)}`
-			: "N/A");
+export default function ToAddress({ to_address }: ToAddressProps) {
+	const displayAddress = to_address
+		? `${to_address.slice(0, 6)}...${to_address.slice(-4)}`
+		: "N/A";
 
 	return (
 		<TooltipProvider>
@@ -36,7 +28,7 @@ export default function ToAddress({
 				<Tooltip>
 					<TooltipTrigger asChild>
 						<Badge
-							variant={isCurrentWallet ? "secondary" : "outline"}
+							variant={"outline"}
 							className="font-mono text-xs cursor-default hover:bg-muted/50 transition-colors group"
 						>
 							<User className="h-3 w-3 mr-1 opacity-50 group-hover:opacity-100 transition-opacity" />
@@ -50,7 +42,7 @@ export default function ToAddress({
 
 				<div className="flex items-center gap-1">
 					<CopyButton text={to_address} />
-					<ViewEtherscan hash={to_address} />
+					<ViewEtherscan hash={to_address} type="address" />
 				</div>
 			</div>
 		</TooltipProvider>
