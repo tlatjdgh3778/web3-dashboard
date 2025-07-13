@@ -77,7 +77,7 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 	{
 		accessorKey: "txFee",
 		header: ({ column }) => (
-			<DataTableColumnHeader column={column} title="Transaction Fee" />
+			<DataTableColumnHeader column={column} title="Tx Fee" />
 		),
 		cell: ({ row }) => <TxFee hash={row.original.hash} />,
 		enableSorting: false,
