@@ -1,13 +1,14 @@
 import alchemy from "@/lib/alchemy";
 import {
 	AssetTransfersCategory,
+	type AssetTransfersWithMetadataParams,
 	type AssetTransfersWithMetadataResult,
 } from "alchemy-sdk";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
 
-async function fetchTransactions(address: string) {
+async function fetchTransactions(params: AssetTransfersWithMetadataParams) {
 	const response = await alchemy.core.getAssetTransfers({
-		fromAddress: address,
+		...params,
 		category: [
 			AssetTransfersCategory.EXTERNAL,
 			AssetTransfersCategory.INTERNAL,
@@ -22,10 +23,16 @@ async function fetchTransactions(address: string) {
 	return response.transfers;
 }
 
-export function useGetTransactions(address: string) {
+export function useGetTransactions({
+	params,
+	options,
+}: {
+	params: AssetTransfersWithMetadataParams;
+	options?: UseQueryOptions<AssetTransfersWithMetadataResult[], Error>;
+}) {
 	return useQuery({
-		queryKey: ["sent-transfers", address],
-		queryFn: async () => fetchTransactions(address),
+		queryKey: ["sent-transfers", params],
+		queryFn: async () => fetchTransactions(params),
 		select: (data) => {
 			const transfers = data as AssetTransfersWithMetadataResult[];
 
@@ -37,5 +44,6 @@ export function useGetTransactions(address: string) {
 
 			return transfers;
 		},
+		...options,
 	});
 }
