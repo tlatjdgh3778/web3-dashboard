@@ -9,9 +9,9 @@ export const getTotalWalletBalance = ({
 		return 0;
 	}
 
-	const totalBalance = walletBalances.reduce((acc, token) => {
-		return acc + Number(token.balance);
+	const totalUsdValue = walletBalances.reduce((acc, token) => {
+		return acc + Number(token.usdValue);
 	}, 0);
 
-	return totalBalance;
+	return totalUsdValue;
 };

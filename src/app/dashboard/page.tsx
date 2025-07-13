@@ -20,10 +20,7 @@ export default function DashboardPage() {
 	const { address } = useAccount();
 	console.log(address);
 
-	// const { data: tokens, isLoading } = useGetTokensForOwner({
-	// 	4eraddress: address as string,
-	// });
-	// const { data: balance, isLoading } = useGetBalance({
+	// const { data: walletBalances, isLoading } = useGetTotalBalances({
 	// 	address: address as string,
 	// });
 

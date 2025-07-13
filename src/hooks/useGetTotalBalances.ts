@@ -55,8 +55,9 @@ export const useGetTotalBalances = ({ address }: { address: string }) => {
 				symbol: "ETH",
 				logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
 				balance: balance.data,
-				rawBalance: Utils.parseEther(balance.data as unknown as `0x${string}`)
-					._hex,
+				rawBalance: balance.data
+					? Utils.parseEther(balance.data as unknown as `0x${string}`)._hex
+					: "0",
 				contractAddress: "0x0000000000000000000000000000000000000000",
 				decimals: 18,
 			} as OwnedToken;

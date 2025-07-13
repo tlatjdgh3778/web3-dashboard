@@ -6,6 +6,7 @@ import TokenAvatar from "@/components/common/token-avatar";
 import { mockTokenPrice } from "@/mock/data/mockTokenPrice";
 import { getTotalWalletBalance } from "@/utils/getTotalWalletBalance";
 import { getTokenPrices } from "@/utils/getTokenPrices";
+// import { useGetTokenPrice } from "@/hooks/useGetTokenPrice";
 
 export default function TotalBalances({
 	walletBalances,
@@ -14,22 +15,18 @@ export default function TotalBalances({
 	walletBalances: OwnedToken[] | undefined;
 	isLoading: boolean;
 }) {
-	if (!walletBalances) {
-		return <div>No data</div>;
-	}
-
 	const symbols = walletBalances
-		.map((token) => token.symbol)
+		?.map((token) => token.symbol)
 		.filter(Boolean) as string[];
+	console.log(`symbols`, symbols);
 
-	console.log(symbols);
-
-	// const { data: tokenQuotes, isLoading: isTokenQuotesLoading } =
+	// const { data: tokenPriceData, isLoading: isTokenQuotesLoading } =
 	// 	useGetTokenPrice({
 	// 		symbols,
 	// 	});
 	const tokenPriceData = mockTokenPrice;
 
+	// if (isLoading || isTokenQuotesLoading) {
 	if (isLoading) {
 		return (
 			<div className="space-y-4">
@@ -40,6 +37,10 @@ export default function TotalBalances({
 				</div>
 			</div>
 		);
+	}
+
+	if (!walletBalances) {
+		return <div>No data</div>;
 	}
 
 	/**

@@ -24,7 +24,6 @@ export const useGetTokenPrice = ({ symbols }: { symbols: string[] }) => {
 		queryKey: ["token-quotes", symbols],
 		queryFn: () => getTokenPrice({ symbols }),
 		select: (data) => {
-			console.log(data);
 			return data;
 		},
 	});
