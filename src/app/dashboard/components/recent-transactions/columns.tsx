@@ -1,14 +1,16 @@
 "use client";
 
-import { DataTableColumnHeader } from "@/components/common/data-table/table-header";
+import type { AssetTransfersWithMetadataResult } from "alchemy-sdk";
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { TransactionHash } from "./transaction-hash";
+import { DataTableColumnHeader } from "@/components/common/data-table/table-header";
+import Timestamp from "@/components/common/timestamp";
 
+import { TransactionHash } from "./transaction-hash";
 import FromAddress from "./from-address";
 import ToAddress from "./to-address";
-import Timestamp from "@/components/common/timestamp";
-import type { AssetTransfersWithMetadataResult } from "alchemy-sdk";
+import BlockNumber from "./block-number";
+import TxFee from "./tx-fee";
 
 export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 	{
@@ -19,14 +21,26 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		cell: ({ row }) => <TransactionHash hash={row.original.hash ?? "N/A"} />,
 		enableSorting: false,
 	},
-	// {
-	// 	accessorKey: "method_label",
-	// 	header: ({ column }) => (
-	// 		<DataTableColumnHeader column={column} title="Method" />
-	// 	),
-	// 	cell: ({ row }) => <Method method={row.original.method_label ?? "N/A"} />,
-	// 	enableSorting: false,
-	// },
+	{
+		accessorKey: "blockNum",
+		header: ({ column }) => (
+			<DataTableColumnHeader column={column} title="Block Number" />
+		),
+		cell: ({ row }) => (
+			<BlockNumber block_number={row.original.blockNum as `0x${string}`} />
+		),
+		enableSorting: false,
+	},
+	{
+		accessorKey: "metadata.blockTimestamp",
+		header: ({ column }) => (
+			<DataTableColumnHeader column={column} title="Block Timestamp" />
+		),
+		cell: ({ row }) => (
+			<Timestamp timestamp={row.original?.metadata.blockTimestamp} />
+		),
+		enableSorting: false,
+	},
 	{
 		accessorKey: "from",
 		header: ({ column }) => (
@@ -46,13 +60,26 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		enableSorting: false,
 	},
 	{
-		accessorKey: "metadata.blockTimestamp",
+		accessorKey: "value",
 		header: ({ column }) => (
-			<DataTableColumnHeader column={column} title="Block Timestamp" />
+			<DataTableColumnHeader column={column} title="Amount" />
 		),
-		cell: ({ row }) => (
-			<Timestamp timestamp={row.original?.metadata.blockTimestamp} />
+		cell: ({ row }) => {
+			const value = row.original.value ?? 0;
+			return (
+				<div>
+					{value.toFixed(2)} {row.original.asset}
+				</div>
+			);
+		},
+		enableSorting: false,
+	},
+	{
+		accessorKey: "txFee",
+		header: ({ column }) => (
+			<DataTableColumnHeader column={column} title="Transaction Fee" />
 		),
+		cell: ({ row }) => <TxFee hash={row.original.hash} />,
 		enableSorting: false,
 	},
 ];

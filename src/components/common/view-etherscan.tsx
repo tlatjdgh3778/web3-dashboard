@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface ViewEtherscanProps {
 	hash?: string;
-	type?: "tx" | "address";
+	type?: "tx" | "address" | "block";
 }
 
 export default function ViewEtherscan({

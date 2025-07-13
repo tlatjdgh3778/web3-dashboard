@@ -8,16 +8,18 @@ import { DataTable } from "@/components/common/data-table/data-table";
 import { mockRecentTransaction } from "@/mock/data/mockRecentTransaction";
 
 import { columns } from "./columns";
+import { useAccount } from "wagmi";
 
 // import { columns } from "./columns";
 
 export default function RecentTransactions() {
-	// const { address } = useAccount();
+	const { address } = useAccount();
+	console.log(address);
 	// const data = mockWalletHistory.result ?? [];
 
 	// const { data: assetTransfers, isLoading } = useGetAssetTransfers({
 	// 	params: {
-	// 		fromAddress: address as string,
+	// 		toAddress: address as string,
 	// 		category: [
 	// 			AssetTransfersCategory.EXTERNAL,
 	// 			AssetTransfersCategory.INTERNAL,
@@ -26,15 +28,17 @@ export default function RecentTransactions() {
 	// 			AssetTransfersCategory.ERC1155,
 	// 		],
 	// 		withMetadata: true,
-	// 		maxCount: 5,
 	// 	},
 	// });
-	const recentTransaction = mockRecentTransaction;
+	// const { data: assetTransfers, isLoading } = useGetTransactions(
+	// 	address as string,
+	// );
+	const assetTransfers = mockRecentTransaction;
 
 	// console.log(isLoading);
 	return (
 		<div className="mx-auto">
-			<DataTable columns={columns} data={recentTransaction} />
+			<DataTable columns={columns} data={assetTransfers ?? []} />
 		</div>
 	);
 }
