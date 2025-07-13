@@ -28,10 +28,10 @@ export default function RecentTransactions() {
 	// 			AssetTransfersCategory.ERC1155,
 	// 		],
 	// 		withMetadata: true,
-	// 	},
+	// 	},W
 	// });
 	// const { data: assetTransfers, isLoading } = useGetTransactions(
-	// 	address as string,
+	// 	toAddress as string,
 	// );
 	const assetTransfers = mockRecentTransaction;
 

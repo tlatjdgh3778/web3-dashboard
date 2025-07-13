@@ -11,6 +11,7 @@ import FromAddress from "./from-address";
 import ToAddress from "./to-address";
 import BlockNumber from "./block-number";
 import TxFee from "./tx-fee";
+import Category from "./category";
 
 export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 	{
@@ -29,6 +30,14 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		cell: ({ row }) => (
 			<BlockNumber block_number={row.original.blockNum as `0x${string}`} />
 		),
+		enableSorting: false,
+	},
+	{
+		accessorKey: "category",
+		header: ({ column }) => (
+			<DataTableColumnHeader column={column} title="Category" />
+		),
+		cell: ({ row }) => <Category category={row.original.category} />,
 		enableSorting: false,
 	},
 	{

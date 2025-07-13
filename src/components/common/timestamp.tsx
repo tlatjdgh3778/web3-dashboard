@@ -14,9 +14,7 @@ export default function Timestamp({ timestamp }: { timestamp?: string }) {
 
 	return (
 		<Tooltip>
-			<TooltipTrigger>
-				<p className="font-mono text-xs">{relativeTime}</p>
-			</TooltipTrigger>
+			<TooltipTrigger>{relativeTime}</TooltipTrigger>
 			<TooltipContent>{absoluteTime}</TooltipContent>
 		</Tooltip>
 	);
