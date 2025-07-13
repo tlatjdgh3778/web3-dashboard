@@ -114,4 +114,26 @@ export const mockRecentTransaction: AssetTransfersWithMetadataResult[] = [
 			blockTimestamp: "2025-07-06T07:06:23.000Z",
 		},
 	},
+	{
+		blockNum: "0x15d8c9a",
+		uniqueId:
+			"0x3f3e075af1586e20a0280f4129e2b91bfa19e53c80fee155a2bdca147809f295:log:120",
+		hash: "0x3f3e075af1586e20a0280f4129e2b91bfa19e53c80fee155a2bdca147809f295",
+		from: "0x4808eb5719d8912a61eff9eda275fbab863c1778",
+		to: "0x74de5d4fcbf63e00296fd95d33236b9794016631",
+		value: 1.5,
+		erc721TokenId: null,
+		erc1155Metadata: null,
+		tokenId: null,
+		asset: "USDC",
+		category: AssetTransfersCategory.ERC20,
+		rawContract: {
+			value: "0x16e360",
+			address: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+			decimal: "0x6",
+		},
+		metadata: {
+			blockTimestamp: "2025-07-13T05:05:59.000Z",
+		},
+	},
 ];
