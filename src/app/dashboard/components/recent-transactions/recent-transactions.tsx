@@ -33,7 +33,7 @@ export default function RecentTransactions() {
 	// const { data: assetTransfers, isLoading } = useGetTransactions(
 	// 	toAddress as string,
 	// );
-	const assetTransfers = mockRecentTransaction;
+	const assetTransfers = mockRecentTransaction.slice(0, 5);
 
 	// console.log(isLoading);
 	return (
