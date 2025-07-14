@@ -9,6 +9,9 @@ import { mockRecentTransaction } from "@/mock/data/mockRecentTransaction";
 
 import { columns } from "./columns";
 import { useAccount } from "wagmi";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 // import { columns } from "./columns";
 
@@ -37,8 +40,21 @@ export default function RecentTransactions() {
 
 	// console.log(isLoading);
 	return (
-		<div className="mx-auto">
+		<div className="mx-auto flex flex-col">
 			<DataTable columns={columns} data={assetTransfers ?? []} />
+
+			<div className="mt-4 flex justify-end">
+				<Link href="/transactions" passHref>
+					<Button
+						variant="outline"
+						size="sm"
+						className="flex items-center gap-1 cursor-pointer"
+					>
+						View All Transactions
+						<ArrowRight className="h-4 w-4" />
+					</Button>
+				</Link>
+			</div>
 		</div>
 	);
 }
