@@ -50,6 +50,7 @@ const Navigation = () => {
 	const navItems = [
 		{ href: "/dashboard", label: "Dashboard" },
 		{ href: "/portfolio", label: "Portfolio" },
+		{ href: "/transactions", label: "Transactions" },
 	];
 
 	return (
