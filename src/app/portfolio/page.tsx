@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { mockTotalBalance } from "@/mock/data/mockTotalBalances";
 
-import TotalBalances from "./components/TotalBalances";
+import TotalBalances from "./components/total-balances/total-balances";
 // import TotalBalances from "../dashboard/components/total-balances/total-balances";
 
 export default function PortfolioPage() {
