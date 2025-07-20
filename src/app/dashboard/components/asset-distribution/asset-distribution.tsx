@@ -1,44 +1,60 @@
 import { Pie, PieChart, Legend, ResponsiveContainer } from "recharts";
+import type { OwnedToken } from "alchemy-sdk";
 
 import type { ChartConfig } from "@/components/ui/chart";
 import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { Skeleton } from "@/components/ui/skeleton";
-import type { ERC20TokenResponse } from "@/types/ERC20Token";
 import { getTokenColor } from "@/utils/getTokenColor";
+import { mockTokenPrice } from "@/mock/data/mockTokenPrice";
+import { getTotalWalletBalance } from "@/utils/getTotalWalletBalance";
+import { getTokenPrices } from "@/utils/getTokenPrices";
 
 import AssetChartLegend from "./asset-chart-legend";
 import AssetChartTooltip from "./asset-chart-tooltip";
 
 interface AssetDistributionProps {
-	data: ERC20TokenResponse | undefined;
+	walletBalances: OwnedToken[] | undefined;
 	isLoading: boolean;
 }
 
 export default function AssetDistribution({
-	data,
+	walletBalances,
 	isLoading,
 }: AssetDistributionProps) {
 	if (isLoading) {
 		return <Skeleton className="h-[300px] w-full rounded-lg" />;
 	}
-	if (!data) {
+	if (!walletBalances) {
 		return <div>No data</div>;
 	}
 
-	// chart data
-	const chartData = data.result?.map((token, index) => ({
+	const tokenPriceData = mockTokenPrice;
+
+	/**
+	 * Process the data to get the token prices
+	 */
+	const tokenPrices = getTokenPrices({
+		walletBalances,
+		tokenPriceData,
+	});
+
+	/**
+	 * Calculate the total balance
+	 */
+	const totalBalance = getTotalWalletBalance({ walletBalances: tokenPrices });
+
+	const chartData = tokenPrices.map((token, index) => ({
 		name: token.symbol,
 		fullName: token.name,
-		value: token.portfolio_percentage,
-		usdValue: token.usd_value,
-		balance: token.balance_formatted,
-		price: token.usd_price,
-		priceChange: token.usd_price_24hr_percent_change,
+		value: (token.usdValue / totalBalance) * 100,
+		usdValue: token.usdValue,
+		balance: token.balance,
+		price: token.usdValue,
+		priceChange: token.usd_24h_change,
 		fill: getTokenColor(token.symbol || "", index),
 	}));
 
-	// chart config
-	const chartConfig = data.result?.reduce((config, token, index) => {
+	const chartConfig = tokenPrices.reduce((config, token, index) => {
 		config[token.symbol || ""] = {
 			label: token.symbol || "",
 			color: getTokenColor(token.symbol || "", index),

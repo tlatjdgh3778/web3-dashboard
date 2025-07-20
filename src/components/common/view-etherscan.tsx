@@ -6,12 +6,16 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface ViewEtherscanProps {
 	hash?: string;
+	type?: "tx" | "address" | "block";
 }
 
-export default function ViewEtherscan({ hash }: ViewEtherscanProps) {
+export default function ViewEtherscan({
+	hash,
+	type = "tx",
+}: ViewEtherscanProps) {
 	const handleViewOnEtherscan = () => {
 		if (!hash) return;
-		window.open(`https://etherscan.io/tx/${hash}`, "_blank");
+		window.open(`https://etherscan.io/${type}/${hash}`, "_blank");
 		toast.info("Opening transaction on Etherscan...");
 	};
 

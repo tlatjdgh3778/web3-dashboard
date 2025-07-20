@@ -22,6 +22,6 @@ export default function useGetEthGasPrice(): UseQueryResult<
 			const data = await response.json();
 			return data.result;
 		},
-		refetchInterval: 60 * 1000 * 30, // 30분마다 데이터 갱신
+		refetchInterval: 60 * 1000 * 30,
 	});
 }

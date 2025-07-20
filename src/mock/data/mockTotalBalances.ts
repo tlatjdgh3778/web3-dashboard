@@ -1,0 +1,57 @@
+import type { OwnedToken } from "alchemy-sdk";
+
+export const mockTotalBalance: OwnedToken[] = [
+	{
+		contractAddress: "0x85f138bfee4ef8e540890cfb48f620571d67eda3",
+		rawBalance: "219984073463235903",
+		decimals: 18,
+		name: "Wrapped AVAX (Wormhole)",
+		symbol: "WAVAX",
+		balance: "0.219984073463235903",
+	},
+	{
+		contractAddress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+		rawBalance: "1659343",
+		decimals: 6,
+		logo: "https://static.alchemyapi.io/images/assets/3408.png",
+		name: "USDC",
+		symbol: "USDC",
+		balance: "1.659343",
+	},
+	{
+		contractAddress: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+		rawBalance: "0",
+		decimals: 18,
+		logo: "https://static.alchemyapi.io/images/assets/2396.png",
+		name: "WETH",
+		symbol: "WETH",
+		balance: "0.0",
+	},
+	{
+		contractAddress: "0xd31a59c85ae9d8edefec411d448f90841571b89c",
+		rawBalance: "9000000",
+		decimals: 9,
+		logo: "https://static.alchemyapi.io/images/assets/16116.png",
+		name: "Wrapped Solana",
+		symbol: "SOL",
+		balance: "0.009",
+	},
+	{
+		contractAddress: "0xdac17f958d2ee523a2206206994597c13d831ec7",
+		rawBalance: "1485587",
+		decimals: 6,
+		logo: "https://static.alchemyapi.io/images/assets/825.png",
+		name: "Tether USDt",
+		symbol: "USDT",
+		balance: "1.485587",
+	},
+	{
+		name: "Ether",
+		symbol: "ETH",
+		logo: "https://assets.coingecko.com/coins/images/279/large/ethereum.png",
+		balance: "0.000094116265058986",
+		rawBalance: "0x5599268be2aa",
+		contractAddress: "0x0000000000000000000000000000000000000000",
+		decimals: 18,
+	},
+];

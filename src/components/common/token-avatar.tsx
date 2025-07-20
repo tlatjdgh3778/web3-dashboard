@@ -4,7 +4,7 @@ export default function TokenAvatar({ src }: { src: string }) {
 	return (
 		<Avatar>
 			<AvatarImage src={src} />
-			<AvatarFallback>{src.charAt(0)}</AvatarFallback>
+			<AvatarFallback>C</AvatarFallback>
 		</Avatar>
 	);
 }
