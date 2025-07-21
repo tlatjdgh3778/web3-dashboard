@@ -40,6 +40,13 @@ export default function TotalBalances({
 		tokenPriceData,
 	});
 
+	// const symbols = walletBalances
+	// ?.map((token) => token.symbol)
+	// .filter(Boolean) as string[];
+	// const { data: tokenMarketData7d } = useGetTokenMarketData({
+	// 	symbols
+	// });
+
 	const tokenMarketData7d = mockTokenMarketData7d;
 
 	/**
