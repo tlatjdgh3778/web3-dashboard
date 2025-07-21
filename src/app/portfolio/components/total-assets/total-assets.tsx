@@ -1,12 +1,16 @@
-import type { OwnedToken } from "alchemy-sdk";
+import type { GetTokensByWalletResponse, Network } from "alchemy-sdk";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { Badge } from "@/components/ui/badge";
 
 export default function TotalAssets({
-	walletBalances,
+	tokensByWallet,
 	isLoading,
 }: {
-	walletBalances: OwnedToken[] | undefined;
+	tokensByWallet: {
+		tokens: GetTokensByWalletResponse["data"]["tokens"];
+		networks: Network[];
+	};
 	isLoading: boolean;
 }) {
 	if (isLoading) {
@@ -23,13 +27,16 @@ export default function TotalAssets({
 
 	return (
 		<div className="space-y-6 flex items-center justify-between">
-			<div className="space-y-2 flex flex-col items-start">
-				<div className="flex items-center justify-center gap-2 text-muted-foreground">
+			<div className="space-y-2 flex flex-1 flex-col items-start">
+				<div className="flex w-full items-center justify-between gap-2 text-muted-foreground">
 					<span className="text-sm font-medium">Total Assets</span>
+					<Badge variant="outline">
+						{tokensByWallet.networks?.length || 0} networks
+					</Badge>
 				</div>
 				<div className="space-y-1">
 					<h1 className="text-3xl font-medium text-foreground">
-						{walletBalances?.length || 0}
+						{tokensByWallet.tokens?.length || 0}
 					</h1>
 				</div>
 			</div>

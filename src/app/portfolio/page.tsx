@@ -7,6 +7,7 @@ import { mockTotalBalance } from "@/mock/data/mockTotalBalances";
 
 import TotalBalances from "./components/total-balances/total-balances";
 import TotalAssets from "./components/total-assets/total-assets";
+import { mockTokensByWallet } from "@/mock/data/mockTokensByWallet";
 // import { useGetTokensByWallet } from "@/hooks/useGetTokensByWallet";
 
 export default function PortfolioPage() {
@@ -17,6 +18,7 @@ export default function PortfolioPage() {
 	// 	address: address as string,
 	// });
 
+	const tokensByWallet = mockTokensByWallet;
 	// console.log(tokens);
 
 	return (
@@ -30,7 +32,7 @@ export default function PortfolioPage() {
 
 				<Card className="lg:col-span-1">
 					<CardContent>
-						<TotalAssets walletBalances={walletBalances} isLoading={false} />
+						<TotalAssets tokensByWallet={tokensByWallet} isLoading={false} />
 					</CardContent>
 				</Card>
 			</div>
