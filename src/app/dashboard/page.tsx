@@ -27,7 +27,6 @@ export default function DashboardPage() {
 
 	const walletBalances = mockTotalBalance;
 
-	// TODO: walletBalances => mockTokensByWallet
 	return (
 		<div className="flex flex-col flex-1 space-y-6">
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
