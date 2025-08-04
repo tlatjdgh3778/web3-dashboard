@@ -59,13 +59,26 @@ export const useGetTokensByWallet = ({
 								token.tokenBalance !==
 									"0x0000000000000000000000000000000000000000000000000000000000000001",
 						)
-						.map((token) => ({
-							...token,
-							tokenBalance: humanBalance(
-								token.tokenBalance,
-								token?.tokenMetadata?.decimals ?? 18,
-							),
-						})) || [],
+						.map((token) => {
+							if ((token as any)?.tokenAddress) {
+								return {
+									...token,
+									tokenMetadata: {
+										decimals: 18,
+										logo: "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+										name: "Ethereum",
+										symbol: "ETH",
+									},
+								};
+							}
+							return {
+								...token,
+								tokenBalance: humanBalance(
+									token.tokenBalance,
+									token?.tokenMetadata?.decimals ?? 18,
+								),
+							};
+						}) || [],
 				networks: [...new Set(data.data.tokens.map((token) => token.network))],
 			};
 		},

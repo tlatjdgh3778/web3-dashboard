@@ -5,7 +5,12 @@ export const mockTokens: GetTokensByWalletResponse["data"]["tokens"] = [
 		address: "0x4808eb5719d8912a61eff9eda275fbab863c1778",
 		network: "eth-mainnet",
 		tokenBalance: "0.000094116265058986",
-		tokenMetadata: {},
+		tokenMetadata: {
+			decimals: 18,
+			logo: "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+			name: "Ethereum",
+			symbol: "ETH",
+		},
 		tokenPrices: [
 			{
 				currency: "usd",
@@ -18,7 +23,12 @@ export const mockTokens: GetTokensByWalletResponse["data"]["tokens"] = [
 		address: "0x4808eb5719d8912a61eff9eda275fbab863c1778",
 		network: "arb-mainnet",
 		tokenBalance: "0.000395268761936101",
-		tokenMetadata: {},
+		tokenMetadata: {
+			decimals: 18,
+			logo: "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
+			name: "Ethereum",
+			symbol: "ETH",
+		},
 		tokenPrices: [
 			{
 				currency: "usd",
@@ -33,7 +43,7 @@ export const mockTokens: GetTokensByWalletResponse["data"]["tokens"] = [
 		tokenAddress: "0x306fd3e7b169aa4ee19412323e1a5995b8c1a1f4",
 		tokenBalance: "15000",
 		tokenMetadata: {
-			logo: "https://static.alchemyapi.io/images/assets/32993.png",
+			logo: "https://coin-images.coingecko.com/coins/images/279/large/ethereum.png?1696501628",
 			name: "Black Agnus",
 			symbol: "FTW",
 		},
