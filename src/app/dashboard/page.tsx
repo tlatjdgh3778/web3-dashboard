@@ -10,7 +10,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
 import { mockTotalBalance } from "@/mock/data/mockTotalBalances";
 
 import TotalBalances from "./components/total-balances/total-balances";
@@ -46,11 +45,7 @@ export default function DashboardPage() {
 						<CardTitle className="text-xl">Gas Tracker</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<GasTracker
-							slow={mockEthGasPrice.slow}
-							standard={mockEthGasPrice.standard}
-							fast={mockEthGasPrice.fast}
-						/>
+						<GasTracker />
 					</CardContent>
 				</Card>
 

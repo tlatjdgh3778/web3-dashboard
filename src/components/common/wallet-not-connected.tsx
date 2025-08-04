@@ -3,7 +3,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Wallet, Zap } from "lucide-react";
 
-import { mockEthGasPrice } from "@/mock/data/mockEthGasPrice";
 import {
 	Card,
 	CardContent,
@@ -55,11 +54,7 @@ export default function WalletNotConnected() {
 						</CardDescription>
 					</CardHeader>
 					<CardContent>
-						<GasTracker
-							slow={mockEthGasPrice.slow}
-							standard={mockEthGasPrice.standard}
-							fast={mockEthGasPrice.fast}
-						/>
+						<GasTracker />
 					</CardContent>
 				</Card>
 			</div>

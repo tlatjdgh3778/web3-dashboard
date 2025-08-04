@@ -1,3 +1,6 @@
+"use client";
+
+import useGetEthGasPrice from "@/hooks/useGetEthGasPrice";
 import { Fuel, Clock, Zap, Activity } from "lucide-react";
 
 const gasPriceCardStyle = {
@@ -28,13 +31,13 @@ const gasTypeConfig = {
 	slow: {
 		icon: Clock,
 		title: "Slow",
-		description: "~5 min",
+		description: "~30 sec",
 		color: "green",
 	},
 	standard: {
 		icon: Activity,
 		title: "Standard",
-		description: "~2 min",
+		description: "~30 sec",
 		color: "yellow",
 	},
 	fast: {
@@ -45,23 +48,23 @@ const gasTypeConfig = {
 	},
 };
 
-export default function GasTracker({
-	slow,
-	standard,
-	fast,
-}: {
-	slow: number;
-	standard: number;
-	fast: number;
-}) {
+export default function GasTracker() {
+	const { data: gasPrice, isLoading } = useGetEthGasPrice();
+
 	const gasData = [
-		{ type: "slow", value: slow },
-		{ type: "standard", value: standard },
-		{ type: "fast", value: fast },
+		{ type: "slow", value: gasPrice?.SafeGasPrice ?? 0 },
+		{ type: "standard", value: gasPrice?.ProposeGasPrice ?? 0 },
+		{ type: "fast", value: gasPrice?.FastGasPrice ?? 0 },
 	];
 
 	// calculate average gas price
-	const averageGas = (slow + standard + fast) / 3;
+	const averageGas =
+		((gasPrice?.SafeGasPrice ?? 0) +
+			(gasPrice?.ProposeGasPrice ?? 0) +
+			(gasPrice?.FastGasPrice ?? 0)) /
+		3;
+
+	console.log(gasData);
 
 	return (
 		<div className="space-y-4">
@@ -83,7 +86,7 @@ export default function GasTracker({
 
 			{/* gas price cards */}
 			<div className="grid grid-cols-3 gap-3">
-				{gasData.map((gas) => {
+				{gasData?.map((gas) => {
 					const config = gasTypeConfig[gas.type as keyof typeof gasTypeConfig];
 					return (
 						<GasPriceCard
@@ -93,6 +96,7 @@ export default function GasTracker({
 							value={gas.value}
 							color={config.color}
 							icon={config.icon}
+							isLoading={isLoading}
 						/>
 					);
 				})}
@@ -117,12 +121,14 @@ export function GasPriceCard({
 	value,
 	color,
 	icon: Icon,
+	isLoading,
 }: {
 	title: string;
 	description: string;
-	value: number;
+	value: number | string;
 	color: string;
 	icon: React.ElementType;
+	isLoading: boolean;
 }) {
 	const colorStyle = gasPriceCardStyle[color as keyof typeof gasPriceCardStyle];
 
@@ -139,9 +145,15 @@ export function GasPriceCard({
 			<div className={`text-xs font-bold ${colorStyle.type}`}>{title}</div>
 
 			{/* price */}
-			<div className={`text-lg font-bold ${colorStyle.font}`}>
-				{value.toFixed(1)} gwei
-			</div>
+			{isLoading ? (
+				<div className="flex justify-center items-center h-6">
+					<div className="h-4 w-4 rounded-full border-2 border-t-transparent border-muted-foreground/30 animate-spin"></div>
+				</div>
+			) : (
+				<div className={`text-lg font-bold ${colorStyle.font}`}>
+					{value ? Number(value).toFixed(1) : "0"} gwei
+				</div>
+			)}
 
 			{/* description */}
 			<div className="text-xs text-muted-foreground">{description}</div>
