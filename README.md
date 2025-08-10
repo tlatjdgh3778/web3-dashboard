@@ -35,7 +35,7 @@ Connect your wallet to view your token balances and visualize your portfolio.
 ## 🔮 Roadmap
 
 - [ ] NFT holdings integration
-- [ ] Deploy to Vercel
+- [ ] All Transactions
 
 ---
 
