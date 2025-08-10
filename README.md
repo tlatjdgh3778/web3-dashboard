@@ -7,12 +7,12 @@ Connect your wallet to view your token balances and visualize your portfolio.
 
 ## 🚀 Features
 
-- [v] Connect Ethereum wallet (RainbowKit → wagmi migration planned)
-- [v] Display connected wallet address (ENS support planned)
-- [v] Live Ethereum gas tracker (low / avg / high)
-- [v] List ERC20 token balances (USDT, DAI, WBTC, MATIC, etc)
-- [v] Visualize token portfolio ratio as a pie chart
-- [ ] Recent 5 transactions summary (Transfer / Swap)
+-  Connect Ethereum wallet (RainbowKit → wagmi migration planned)
+-  Display connected wallet address (ENS support planned)
+-  Live Ethereum gas tracker (low / avg / high)
+-  List ERC20 token balances (USDT, AVAX, USDC, etc)
+-  Visualize token portfolio ratio as a pie chart
+-  Recent 5 transactions summary (Transfer / Swap)
 
 ---
 
@@ -35,15 +35,34 @@ Connect your wallet to view your token balances and visualize your portfolio.
 ## 🔮 Roadmap
 
 - [ ] NFT holdings integration
-- [ ] Export token list as CSV
 - [ ] Deploy to Vercel
 
 ---
 
 ## ⚡ Getting Started
 
+1. Clone the repository:
 ```bash
 git clone https://github.com/tlatjdgh3778/web3-dashboard.git
 cd web3-dashboard
+```
+
+2. Install dependencies:
+```bash
 pnpm install
+```
+
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+```
+Edit `.env.local` and add your Alchemy API key and other required variables.
+
+4. Run the development server:
+```bash
 pnpm run dev
+```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
