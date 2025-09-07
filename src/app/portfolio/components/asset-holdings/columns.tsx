@@ -20,6 +20,9 @@ export const columns: ColumnDef<
 		),
 		cell: ({ row }) => <Token token={row.original.tokenMetadata} />,
 		enableSorting: false,
+		meta: {
+			title: "Token",
+		},
 	},
 	{
 		accessorKey: "price_change_percentage_24h",
@@ -33,6 +36,9 @@ export const columns: ColumnDef<
 			/>
 		),
 		enableSorting: false,
+		meta: {
+			title: "24h Price Change",
+		},
 	},
 	{
 		accessorKey: "tokenBalance",
@@ -47,5 +53,8 @@ export const columns: ColumnDef<
 			/>
 		),
 		enableSorting: false,
+		meta: {
+			title: "Balance",
+		},
 	},
 ];

@@ -22,6 +22,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		),
 		cell: ({ row }) => <TransactionHash hash={row.original.hash ?? "N/A"} />,
 		enableSorting: false,
+		meta: {
+			title: "Transaction Hash",
+		},
 	},
 	{
 		accessorKey: "blockNum",
@@ -32,6 +35,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 			<BlockNumber block_number={row.original.blockNum as `0x${string}`} />
 		),
 		enableSorting: false,
+		meta: {
+			title: "Block Number",
+		},
 	},
 	{
 		accessorKey: "uniqueId",
@@ -40,6 +46,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		),
 		cell: ({ row }) => <Method hash={row.original.hash} />,
 		enableSorting: false,
+		meta: {
+			title: "Method",
+		},
 	},
 	{
 		accessorKey: "category",
@@ -48,6 +57,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		),
 		cell: ({ row }) => <Category category={row.original.category} />,
 		enableSorting: false,
+		meta: {
+			title: "Category",
+		},
 	},
 	{
 		accessorKey: "metadata.blockTimestamp",
@@ -58,6 +70,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 			<Timestamp timestamp={row.original?.metadata.blockTimestamp} />
 		),
 		enableSorting: false,
+		meta: {
+			title: "Block Timestamp",
+		},
 	},
 	{
 		accessorKey: "from",
@@ -68,6 +83,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 			<FromAddress from_address={row.original?.from as string} />
 		),
 		enableSorting: false,
+		meta: {
+			title: "From",
+		},
 	},
 	{
 		accessorKey: "to",
@@ -76,6 +94,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		),
 		cell: ({ row }) => <ToAddress to_address={row.original?.to as string} />,
 		enableSorting: false,
+		meta: {
+			title: "To",
+		},
 	},
 	{
 		accessorKey: "value",
@@ -91,6 +112,9 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 			);
 		},
 		enableSorting: false,
+		meta: {
+			title: "Amount",
+		},
 	},
 	{
 		accessorKey: "txFee",
@@ -99,5 +123,8 @@ export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 		),
 		cell: ({ row }) => <TxFee hash={row.original.hash} />,
 		enableSorting: false,
+		meta: {
+			title: "Tx Fee",
+		},
 	},
 ];
