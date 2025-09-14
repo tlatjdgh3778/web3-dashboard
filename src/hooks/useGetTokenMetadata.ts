@@ -20,6 +20,7 @@ export const useGetTokenMetadata = ({
 		queryKey: ["tokenMetadata", tokenAddress],
 		queryFn: () => getTokenMetadata(tokenAddress),
 		staleTime: Infinity,
+		enabled: !!tokenAddress && tokenAddress !== "",
 		...options,
 	});
 };
