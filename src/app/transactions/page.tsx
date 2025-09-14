@@ -2,7 +2,7 @@ import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 
 import Transactions from "./transactions/transactions";
-import NativeTransactions from "./native-transactions/native-transactions";
+import InternalTransactions from "./internal-transactions/internal-transactions";
 import Erc20 from "./erc-20/erc-20";
 import NftTransfers from "./nft-transfers/nft-transfers";
 
@@ -15,8 +15,11 @@ export default function TransactionsPage() {
 						<TabsTrigger className="cursor-pointer" value="transactions">
 							Transactions
 						</TabsTrigger>
-						<TabsTrigger className="cursor-pointer" value="native_transactions">
-							Native Transactions
+						<TabsTrigger
+							className="cursor-pointer"
+							value="internal_transactions"
+						>
+							Internal Transactions
 						</TabsTrigger>
 						<TabsTrigger className="cursor-pointer" value="erc_20_transactions">
 							ERC-20
@@ -31,8 +34,8 @@ export default function TransactionsPage() {
 					<TabsContent value="transactions">
 						<Transactions />
 					</TabsContent>
-					<TabsContent value="native_transactions">
-						<NativeTransactions />
+					<TabsContent value="internal_transactions">
+						<InternalTransactions />
 					</TabsContent>
 					<TabsContent value="erc_20_transactions">
 						<Erc20 />
