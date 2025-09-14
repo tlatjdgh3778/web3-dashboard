@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import Transactions from "./transactions/transactions";
 import InternalTransactions from "./internal-transactions/internal-transactions";
 import Erc20 from "./erc-20/erc-20";
-import NftTransfers from "./nft-transfers/nft-transfers";
 
 export default function TransactionsPage() {
 	return (
@@ -24,12 +23,6 @@ export default function TransactionsPage() {
 						<TabsTrigger className="cursor-pointer" value="erc_20_transactions">
 							ERC-20
 						</TabsTrigger>
-						<TabsTrigger
-							className="cursor-pointer"
-							value="erc_721_transactions"
-						>
-							NFT Transfers
-						</TabsTrigger>
 					</TabsList>
 					<TabsContent value="transactions">
 						<Transactions />
@@ -39,9 +32,6 @@ export default function TransactionsPage() {
 					</TabsContent>
 					<TabsContent value="erc_20_transactions">
 						<Erc20 />
-					</TabsContent>
-					<TabsContent value="erc_721_transactions">
-						<NftTransfers />
 					</TabsContent>
 				</Tabs>
 			</CardContent>
