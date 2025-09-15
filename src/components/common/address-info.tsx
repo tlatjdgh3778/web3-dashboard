@@ -1,16 +1,16 @@
+"use client";
+
 import { Copy } from "lucide-react";
-import { useEnsName } from "wagmi";
+import { useAccount, useEnsName } from "wagmi";
 import { toast } from "sonner";
 
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
-export default function AddressInfo({
-	address,
-}: {
-	address: `0x${string}` | undefined;
-}) {
+export default function AddressInfo() {
+	const { address } = useAccount();
+
 	const ensName = useEnsName({ address });
 
 	// copy address to clipboard
