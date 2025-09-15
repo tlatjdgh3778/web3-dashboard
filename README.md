@@ -1,4 +1,4 @@
-# Web3 Dashboard (Mini Version)
+# Web3 Dashboard
 
 A minimal Web3 portfolio tracker built with Next.js, wagmi, and RainbowKit.  
 Connect your wallet to view your token balances and visualize your portfolio.
@@ -7,13 +7,12 @@ Connect your wallet to view your token balances and visualize your portfolio.
 
 ## 🚀 Features
 
--  Connect Ethereum wallet (RainbowKit → wagmi migration planned)
--  Display connected wallet address (ENS support planned)
+-  Connect Ethereum wallet
+-  Display connected wallet address
 -  Live Ethereum gas tracker (low / avg / high)
 -  List ERC20 token balances (USDT, AVAX, USDC, etc)
 -  Visualize token portfolio ratio as a pie chart
 -  Recent 5 transactions summary (Transfer / Swap)
-
 ---
 
 ## 📈 Demo
@@ -32,12 +31,6 @@ Connect your wallet to view your token balances and visualize your portfolio.
 
 ---
 
-## 🔮 Roadmap
-
-- [ ] NFT holdings integration
-- [ ] All Transactions
-
----
 
 ## ⚡ Getting Started
 
