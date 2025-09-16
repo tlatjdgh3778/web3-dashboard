@@ -1,3 +1,5 @@
+"use client";
+
 import GasTracker from "@/components/common/gas-tracker";
 import {
 	Card,

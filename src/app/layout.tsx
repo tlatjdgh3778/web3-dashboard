@@ -1,13 +1,11 @@
-import LayoutProvider from "@/components/common/layout-provider";
-
-import "./globals.css";
 import Header from "@/components/common/header";
 import WalletGuard from "@/components/common/wallet-guard";
-import { geistMono, geistSans } from "./ui/fonts";
 import { Toaster } from "@/components/ui/sonner";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { QueryProvider } from "@/components/providers/query-provider";
-import MSWBootstrap from "@/mock/mock-bootstrap";
+
+import { geistMono, geistSans } from "./ui/fonts";
+import ClientProviders from "./client-providers";
+
+import "./globals.css";
 
 export default function RootLayout({
 	children,
@@ -25,26 +23,15 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
 			>
-				<MSWBootstrap>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-					>
-						<QueryProvider>
-							<LayoutProvider>
-								<div className="min-h-screen flex flex-col">
-									<Header />
-									<main className="flex flex-1">
-										<Toaster position="top-right" />
-										<WalletGuard>{children}</WalletGuard>
-									</main>
-								</div>
-							</LayoutProvider>
-						</QueryProvider>
-					</ThemeProvider>
-				</MSWBootstrap>
+				<ClientProviders>
+					<div className="min-h-screen flex flex-col">
+						<Header />
+						<main className="flex flex-1">
+							<Toaster position="top-right" />
+							<WalletGuard>{children}</WalletGuard>
+						</main>
+					</div>
+				</ClientProviders>
 			</body>
 		</html>
 	);
