@@ -1,43 +1,36 @@
-import { TrendingUp, TrendingDown, DollarSign } from "lucide-react";
-import type { OwnedToken } from "alchemy-sdk";
+"use client";
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { TrendingUp, TrendingDown, DollarSign } from "lucide-react";
+
 import TokenAvatar from "@/components/common/token-avatar";
-import { mockTokenPrice } from "@/mock/data/mockTokenPrice";
 import { getTotalWalletBalance } from "@/utils/getTotalWalletBalance";
 import { getTokenPrices } from "@/utils/getTokenPrices";
+
+import { useGetTotalBalances } from "@/hooks/useGetTotalBalances";
+import { useGetTokenPrice } from "@/hooks/useGetTokenPrice";
+import { useAccount } from "wagmi";
 // import { useGetTokenPrice } from "@/hooks/useGetTokenPrice";
 
-export default function TotalBalances({
-	walletBalances,
-	isLoading,
-}: {
-	walletBalances: OwnedToken[] | undefined;
-	isLoading: boolean;
-}) {
+export function TotalBalances() {
+	const { address } = useAccount();
+
+	const { data: walletBalances, isLoading } = useGetTotalBalances({
+		address: address as string,
+	});
+
+	console.log(`isLoading`, isLoading);
+
 	const symbols = walletBalances
 		?.map((token) => token.symbol)
 		.filter(Boolean) as string[];
-	console.log(`symbols`, symbols);
 
-	// const { data: tokenPriceData, isLoading: isTokenQuotesLoading } =
-	// 	useGetTokenPrice({
-	// 		symbols,
-	// 	});
-	const tokenPriceData = mockTokenPrice;
+	const { data: tokenPriceData, isLoading: isTokenQuotesLoading } =
+		useGetTokenPrice({
+			symbols,
+		});
 
-	// if (isLoading || isTokenQuotesLoading) {
-	if (isLoading) {
-		return (
-			<div className="space-y-4">
-				<Skeleton className="h-12 w-full" />
-				<div className="grid grid-cols-2 gap-4">
-					<Skeleton className="h-16 w-full" />
-					<Skeleton className="h-16 w-full" />
-				</div>
-			</div>
-		);
-	}
+	console.log(`isTokenQuotesLoading`, isTokenQuotesLoading);
+	// const tokenPriceData = mockTokenPrice;
 
 	if (!walletBalances) {
 		return <div>No data</div>;
@@ -143,4 +136,8 @@ export default function TotalBalances({
 			</div>
 		</div>
 	);
+}
+
+export default function TotalBalancesClient() {
+	return <TotalBalances />;
 }
