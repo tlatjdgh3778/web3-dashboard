@@ -1,5 +1,3 @@
-"use client";
-
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Wallet, Zap } from "lucide-react";
 
