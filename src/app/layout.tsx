@@ -1,5 +1,3 @@
-"use client";
-
 import LayoutProvider from "@/components/common/layout-provider";
 
 import "./globals.css";
@@ -9,6 +7,7 @@ import { geistMono, geistSans } from "./ui/fonts";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
+import MSWBootstrap from "@/mock/mock-bootstrap";
 
 export default function RootLayout({
 	children,
@@ -26,24 +25,26 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
 			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<QueryProvider>
-						<LayoutProvider>
-							<div className="min-h-screen flex flex-col">
-								<Header />
-								<main className="flex flex-1">
-									<Toaster position="top-right" />
-									<WalletGuard>{children}</WalletGuard>
-								</main>
-							</div>
-						</LayoutProvider>
-					</QueryProvider>
-				</ThemeProvider>
+				<MSWBootstrap>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						<QueryProvider>
+							<LayoutProvider>
+								<div className="min-h-screen flex flex-col">
+									<Header />
+									<main className="flex flex-1">
+										<Toaster position="top-right" />
+										<WalletGuard>{children}</WalletGuard>
+									</main>
+								</div>
+							</LayoutProvider>
+						</QueryProvider>
+					</ThemeProvider>
+				</MSWBootstrap>
 			</body>
 		</html>
 	);

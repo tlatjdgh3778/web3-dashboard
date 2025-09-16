@@ -7,7 +7,7 @@ const config = getDefaultConfig({
 	appName: "My RainbowKit App",
 	projectId: "YOUR_PROJECT_ID",
 	chains: [mainnet, zksync, sepolia, anvil],
-	ssr: true, // If your dApp uses server side rendering (SSR)
+	ssr: true,
 });
 
 export default config;
