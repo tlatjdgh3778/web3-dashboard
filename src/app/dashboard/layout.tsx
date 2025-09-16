@@ -1,10 +1,6 @@
 import AddressInfo from "@/components/common/address-info";
 
-export default function DashboardLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="flex flex-col flex-1 gap-4 py-4 px-16">
 			<h1 className="text-2xl font-bold">Dashboard</h1>
