@@ -1,7 +1,3 @@
-"use client";
-
-import { useAccount } from "wagmi";
-
 import GasTracker from "@/components/common/gas-tracker";
 import {
 	Card,
@@ -17,9 +13,6 @@ import AssetDistribution from "./components/asset-distribution/asset-distributio
 import RecentTransactions from "./components/recent-transactions/recent-transactions";
 
 export default function DashboardPage() {
-	const { address } = useAccount();
-	console.log(address);
-
 	// const { data: walletBalances, isLoading } = useGetTotalBalances({
 	// 	address: address as string,
 	// });
@@ -35,7 +28,7 @@ export default function DashboardPage() {
 						<CardTitle className="text-xl">Total Balances</CardTitle>
 					</CardHeader>
 					<CardContent>
-						<TotalBalances walletBalances={walletBalances} isLoading={false} />
+						<TotalBalances />
 					</CardContent>
 				</Card>
 
