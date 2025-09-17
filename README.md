@@ -5,7 +5,7 @@ Connect your wallet to view your token balances and visualize your portfolio.
 
 ---
 
-## 🚀 Features
+## Features
 
 -  Connect Ethereum wallet
 -  Display connected wallet address
@@ -15,11 +15,11 @@ Connect your wallet to view your token balances and visualize your portfolio.
 -  Recent 5 transactions summary (Transfer / Swap)
 ---
 
-## 📈 Demo
+## Demo
 [Live Link](https://web3-dashboard-pi.vercel.app/)
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - Next.js
 - TypeScript
@@ -32,7 +32,40 @@ Connect your wallet to view your token balances and visualize your portfolio.
 ---
 
 
-## ⚡ Getting Started
+## Component Structure
+```mermaid
+flowchart TD
+    RootLayout["RootLayout (app/layout.tsx)"] --> ClientProviders["ClientProviders"]
+    RootLayout --> Header["Header"]
+    RootLayout --> WalletGuard["WalletGuard"]
+    
+    WalletGuard --> MainContent["Pages Content"]
+    
+    MainContent -->|"isConnected=false"| HomePage["HomePage(WalletNotConnected) (/)"]
+    MainContent -->|"isConnected=true"| DashboardPage["DashboardPage (/dashboard)"]
+    MainContent -->|"isConnected=true"| PortfolioPage["PortfolioPage (/portfolio)"]
+    MainContent -->|"isConnected=true"| TransactionsPage["TransactionsPage (/transactions)"]
+    
+
+    HomePage --> ConnectButton["ConnectButton (RainbowKit)"]
+    HomePage --> GasTrackerComponent["GasTracker"]
+
+    DashboardPage --> TotalBalances["TotalBalances"]
+    DashboardPage --> GasTracker["GasTracker"]
+    DashboardPage --> AssetDistribution["AssetDistribution"]
+    DashboardPage --> RecentTransactions["RecentTransactions"]
+    
+    PortfolioPage --> PortfolioTotalBalances["TotalBalances"]
+    PortfolioPage --> TotalAssets["TotalAssets"]
+    PortfolioPage --> BestPerformer["BestPerformer"]
+    PortfolioPage --> AssetHoldings["AssetHoldings"]
+
+    TransactionsPage --> TransactionsTab["Transactions"]
+    TransactionsPage --> InternalTransactionsTab["InternalTransactions"]
+    TransactionsPage --> ERC20Tab["ERC-20 Transactions"]
+```
+
+## Getting Started
 
 1. Clone the repository:
 ```bash
