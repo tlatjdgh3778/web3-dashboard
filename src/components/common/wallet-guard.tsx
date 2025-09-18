@@ -2,8 +2,8 @@
 
 import { useAccount } from "wagmi";
 import { useState, useEffect } from "react";
-import WalletNotConnected from "./wallet-not-connected";
 import { useRouter, usePathname } from "next/navigation";
+import Page from "@/app/page";
 
 export default function WalletGuard({
 	children,
@@ -27,5 +27,5 @@ export default function WalletGuard({
 		return null;
 	}
 
-	return <>{isConnected ? children : <WalletNotConnected />}</>;
+	return <>{isConnected ? children : <Page />}</>;
 }
