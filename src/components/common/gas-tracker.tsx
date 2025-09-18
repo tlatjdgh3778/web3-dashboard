@@ -52,19 +52,17 @@ export default function GasTracker() {
 	const { data: gasPrice, isLoading } = useGetEthGasPrice();
 
 	const gasData = [
-		{ type: "slow", value: gasPrice?.SafeGasPrice ?? 0 },
-		{ type: "standard", value: gasPrice?.ProposeGasPrice ?? 0 },
-		{ type: "fast", value: gasPrice?.FastGasPrice ?? 0 },
+		{ type: "slow", value: Number(gasPrice?.SafeGasPrice) || 0 },
+		{ type: "standard", value: Number(gasPrice?.ProposeGasPrice) || 0 },
+		{ type: "fast", value: Number(gasPrice?.FastGasPrice) || 0 },
 	];
 
 	// calculate average gas price
 	const averageGas =
-		((gasPrice?.SafeGasPrice ?? 0) +
-			(gasPrice?.ProposeGasPrice ?? 0) +
-			(gasPrice?.FastGasPrice ?? 0)) /
+		((Number(gasPrice?.SafeGasPrice) || 0) +
+			(Number(gasPrice?.ProposeGasPrice) || 0) +
+			(Number(gasPrice?.FastGasPrice) || 0)) /
 		3;
-
-	console.log(gasData);
 
 	return (
 		<div className="space-y-4">
@@ -78,7 +76,7 @@ export default function GasTracker() {
 				</div>
 				<div className="text-right">
 					<div className="text-sm font-medium">
-						Avg: {averageGas.toFixed(2)} gwei
+						Avg: {averageGas ? averageGas.toFixed(2) : 0} gwei
 					</div>
 					<div className="text-xs text-muted-foreground">Live prices</div>
 				</div>
