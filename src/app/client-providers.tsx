@@ -4,7 +4,7 @@
 import { Toaster } from "@/components/ui/sonner";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { QueryProvider } from "@/components/providers/query-provider";
+import QueryProvider from "@/components/providers/query-provider";
 import LayoutProvider from "@/components/common/layout-provider";
 import MSWBootstrap from "@/mock/mock-bootstrap";
 
@@ -14,20 +14,20 @@ export default function ClientProviders({
 	children: React.ReactNode;
 }) {
 	return (
-		<MSWBootstrap>
-			<ThemeProvider
-				attribute="class"
-				defaultTheme="system"
-				enableSystem
-				disableTransitionOnChange
-			>
-				<QueryProvider>
+		<QueryProvider>
+			<MSWBootstrap>
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
 					<LayoutProvider>
 						<Toaster position="top-right" />
 						{children}
 					</LayoutProvider>
-				</QueryProvider>
-			</ThemeProvider>
-		</MSWBootstrap>
+				</ThemeProvider>
+			</MSWBootstrap>
+		</QueryProvider>
 	);
 }
