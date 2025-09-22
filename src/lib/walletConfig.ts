@@ -8,6 +8,10 @@ const config = getDefaultConfig({
 	projectId: "YOUR_PROJECT_ID",
 	chains: [mainnet, zksync, sepolia, anvil],
 	ssr: true,
+	// TODO:
+	// storage: createStorage({
+	// 	storage: cookieStorage, // ✅ SSR 안전
+	// }),
 });
 
 export default config;
