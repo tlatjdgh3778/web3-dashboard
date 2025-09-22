@@ -21,6 +21,9 @@ export const fetchEthGasPrice = async () => {
 	const API_KEY = process.env.NEXT_PUBLIC_ETHSCAN_API_KEY;
 	const response = await fetch(
 		`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${API_KEY}`,
+		{
+			cache: "force-cache",
+		},
 	);
 	const data = await response.json();
 	return data.result;

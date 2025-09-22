@@ -17,6 +17,7 @@ const getTokenMarketData = async ({
 	const response = await fetch(
 		`https://pro-api.coingecko.com/api/v3/coins/markets?include_tokens=true&vs_currency=usd&symbols=${symbols.join(",")}&sparkline=true&price_change_percentage=${time}`,
 		{
+			cache: "force-cache",
 			headers: {
 				"x-cg-demo-api-key": process.env
 					.NEXT_PUBLIC_COINGECKO_API_KEY as string,
