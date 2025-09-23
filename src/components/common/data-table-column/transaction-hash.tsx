@@ -18,7 +18,7 @@ interface TransactionHashProps {
 	showFullHash?: boolean;
 }
 
-export function TransactionHash({
+export default function TransactionHash({
 	hash,
 	className,
 	showFullHash = false,
