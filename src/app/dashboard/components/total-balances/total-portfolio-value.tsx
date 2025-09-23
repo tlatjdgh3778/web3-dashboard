@@ -1,33 +1,13 @@
 "use client";
 
-import { useAccount } from "wagmi";
 import { DollarSign, TrendingDown, TrendingUp } from "lucide-react";
 
-import { getTokenPrices } from "@/utils/getTokenPrices";
-import { getTotalWalletBalance } from "@/utils/getTotalWalletBalance";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useGetTotalBalances } from "@/hooks/useGetTotalBalances";
 
-import { useGetTokenPricesFromWalletBalances } from "../../hooks/useGetTokenPricesFromWalletBalances";
+import { useGetWalletTotalBalance } from "../../hooks/useGetWalletTotalBalance";
 
 export default function TotalPortfolioValue() {
-	const { address } = useAccount();
-
-	const { data: walletBalances, isLoading } = useGetTotalBalances({
-		address: address as string,
-	});
-	const { tokenPriceData, isTokenQuotesLoading } =
-		useGetTokenPricesFromWalletBalances({
-			walletBalances,
-		});
-
-	const tokenPrices = getTokenPrices({
-		walletBalances,
-		tokenPriceData,
-	});
-	const totalBalance = getTotalWalletBalance({
-		walletBalances: tokenPrices,
-	});
+	const { totalBalance, tokenPrices, isLoading } = useGetWalletTotalBalance();
 
 	const totalChange24h = tokenPrices.reduce((acc, token) => {
 		return acc + (token.usd_24h_change || 0) * Number(token.balance);
@@ -38,7 +18,7 @@ export default function TotalPortfolioValue() {
 
 	const isPositive = totalChange24h >= 0;
 
-	if (isLoading || isTokenQuotesLoading) {
+	if (isLoading) {
 		return <TotalPortfolioValueSkeleton />;
 	}
 

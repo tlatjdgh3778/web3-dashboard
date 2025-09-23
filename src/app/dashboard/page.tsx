@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 
 import TotalBalances from "./components/total-balances/total-balances";
+import AssetDistribution from "./components/asset-distribution/asset-distribution";
 // import AssetDistribution from "./components/asset-distribution/asset-distribution";
 // import RecentTransactions from "./components/recent-transactions/recent-transactions";
 
@@ -41,10 +42,7 @@ export default function DashboardPage() {
 						<CardTitle className="text-xl">Asset Distribution</CardTitle>
 					</CardHeader>
 					<CardContent className="pt-0">
-						{/* <AssetDistribution
-							walletBalances={walletBalances}
-							isLoading={false}
-						/> */}
+						<AssetDistribution />
 					</CardContent>
 				</Card>
 			</div>

@@ -1,38 +1,18 @@
 "use client";
 
-import { useAccount } from "wagmi";
-
-import { getTokenPrices } from "@/utils/getTokenPrices";
-import { useGetTotalBalances } from "@/hooks/useGetTotalBalances";
 import TokenAvatar from "@/components/common/token-avatar";
-import { getTotalWalletBalance } from "@/utils/getTotalWalletBalance";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useGetTokenPricesFromWalletBalances } from "../../hooks/useGetTokenPricesFromWalletBalances";
+import { useGetWalletTotalBalance } from "../../hooks/useGetWalletTotalBalance";
 
 export default function TopThreeHoldings() {
-	const { address } = useAccount();
-
-	const { data: walletBalances, isLoading } = useGetTotalBalances({
-		address: address as string,
-	});
-	const { tokenPriceData, isTokenQuotesLoading } =
-		useGetTokenPricesFromWalletBalances({
-			walletBalances,
-		});
-
-	const tokenPrices = getTokenPrices({
-		walletBalances,
-		tokenPriceData,
-	});
-
-	const totalBalance = getTotalWalletBalance({ walletBalances: tokenPrices });
+	const { totalBalance, tokenPrices, isLoading } = useGetWalletTotalBalance();
 
 	const top3Holdings = tokenPrices
 		.sort((a, b) => (b.usdValue || 0) - (a.usdValue || 0))
 		.slice(0, 3);
 
-	if (isLoading || isTokenQuotesLoading) {
+	if (isLoading) {
 		return <TopThreeHoldingsSkeleton />;
 	}
 
