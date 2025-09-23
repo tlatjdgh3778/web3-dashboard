@@ -1,44 +1,39 @@
-// import { DataTable } from "@/components/common/data-table/data-table";
+"use client";
 
-// import { AssetTransfersCategory } from "alchemy-sdk";
-import { DataTable } from "@/components/common/data-table/data-table";
-// import { useAccount } from "wagmi";
-
-// import { useGetAssetTransfers } from "@/hooks/useGetAssetTransfers";
-import { mockRecentTransaction } from "@/mock/data/mockRecentTransaction";
-
-import { columns } from "./columns";
 import { useAccount } from "wagmi";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { AssetTransfersCategory } from "alchemy-sdk";
 
-// import { columns } from "./columns";
+import { DataTable } from "@/components/common/data-table/data-table";
+import { Button } from "@/components/ui/button";
+import { useGetRecentTransactions } from "@/hooks/useGetRecentTransactions";
+import TableLoadingSkeleton from "@/components/common/data-table/table-loading-skeleton";
+
+import { columns } from "./columns";
 
 export default function RecentTransactions() {
 	const { address } = useAccount();
-	console.log(address);
-	// const data = mockWalletHistory.result ?? [];
 
-	// const { data: assetTransfers, isLoading } = useGetAssetTransfers({
-	// 	params: {
-	// 		toAddress: address as string,
-	// 		category: [
-	// 			AssetTransfersCategory.EXTERNAL,
-	// 			AssetTransfersCategory.INTERNAL,
-	// 			AssetTransfersCategory.ERC20,
-	// 			AssetTransfersCategory.ERC721,
-	// 			AssetTransfersCategory.ERC1155,
-	// 		],
-	// 		withMetadata: true,
-	// 	},W
-	// });
-	// const { data: assetTransfers, isLoading } = useGetTransactions(
-	// 	toAddress as string,
-	// );
-	const assetTransfers = mockRecentTransaction.slice(0, 5);
+	const { data: assetTransfers, isPending } = useGetRecentTransactions({
+		params: {
+			toAddress: address as string,
+			fromAddress: address as string,
+			withMetadata: true,
+			category: [
+				AssetTransfersCategory.EXTERNAL,
+				AssetTransfersCategory.INTERNAL,
+				AssetTransfersCategory.ERC20,
+				AssetTransfersCategory.ERC721,
+				AssetTransfersCategory.ERC1155,
+			],
+		},
+	});
 
-	// console.log(isLoading);
+	if (isPending) {
+		return <TableLoadingSkeleton />;
+	}
+
 	return (
 		<div className="mx-auto flex flex-col">
 			<DataTable columns={columns} data={assetTransfers ?? []} />

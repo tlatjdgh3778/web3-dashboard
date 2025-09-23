@@ -9,8 +9,7 @@ import {
 
 import TotalBalances from "./components/total-balances/total-balances";
 import AssetDistribution from "./components/asset-distribution/asset-distribution";
-// import AssetDistribution from "./components/asset-distribution/asset-distribution";
-// import RecentTransactions from "./components/recent-transactions/recent-transactions";
+import RecentTransactions from "./components/recent-transactions/recent-transactions";
 
 export default function DashboardPage() {
 	return (
@@ -54,7 +53,7 @@ export default function DashboardPage() {
 					<CardDescription>Your latest 5 transactions</CardDescription>
 				</CardHeader>
 				<CardContent className="pt-0">
-					{/* <RecentTransactions /> */}
+					<RecentTransactions />
 				</CardContent>
 			</Card>
 		</div>
