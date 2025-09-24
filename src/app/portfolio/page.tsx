@@ -9,7 +9,6 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
-import { mockTotalBalance } from "@/mock/data/mockTotalBalances";
 
 import TotalBalances from "./components/total-balances/total-balances";
 import TotalAssets from "./components/total-assets/total-assets";
@@ -24,7 +23,6 @@ export default function PortfolioPage() {
 	// const { data: totalBalances } = useGetTotalBalances({
 	// 	address: address as string,
 	// });
-	const walletBalances = mockTotalBalance;
 	// const { data: tokens } = useGetTokensByWallet({
 	// 	address: address as string,
 	// });
@@ -49,7 +47,7 @@ export default function PortfolioPage() {
 
 				<Card className="lg:col-span-1">
 					<CardContent>
-						<BestPerformer walletBalances={walletBalances} isLoading={false} />
+						<BestPerformer />
 					</CardContent>
 				</Card>
 			</div>

@@ -1,41 +1,26 @@
+"use client";
+
+import { useAccount } from "wagmi";
 import type { OwnedToken } from "alchemy-sdk";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
 import TokenAvatar from "@/components/common/token-avatar";
 import { Skeleton } from "@/components/ui/skeleton";
-import { mockTokenMarketData7d } from "@/mock/data/mockTokenMarketData";
+import { useGetTotalBalances } from "@/hooks/useGetTotalBalances";
+import { useGetTokenMarketData } from "@/hooks/useGetTokenMarketData";
+import { PriceChangePercentage } from "@/types/PriceChangePercentage";
 
-export default function BestPerformer({
-	walletBalances,
-	isLoading,
-}: {
-	walletBalances: OwnedToken[] | undefined;
-	isLoading: boolean;
-}) {
+function Performer({ walletBalances }: { walletBalances: OwnedToken[] }) {
 	const symbols = walletBalances
-		?.map((token) => token.symbol)
+		?.map((token) => token.symbol?.toLowerCase())
 		.filter(Boolean) as string[];
 
-	console.log(symbols);
+	const { data: tokenMarketData7d, isPending } = useGetTokenMarketData({
+		symbols,
+		time: PriceChangePercentage.ONE_WEEK,
+	});
 
-	if (isLoading) {
-		return (
-			<div className="space-y-4">
-				<Skeleton className="h-12 w-full" />
-				<div className="grid grid-cols-2 gap-4">
-					<Skeleton className="h-16 w-full" />
-				</div>
-			</div>
-		);
-	}
-
-	// const { data: tokenMarketData7d } = useGetTokenMarketData({
-	// 	symbols
-	// });
-
-	const tokenMarketData7d = mockTokenMarketData7d;
-
-	const bestPerformer = tokenMarketData7d.sort((a, b) => {
+	const bestPerformer = tokenMarketData7d?.sort((a, b) => {
 		const aChange = a?.price_change_percentage_24h || 0;
 		const bChange = b?.price_change_percentage_24h || 0;
 
@@ -45,6 +30,16 @@ export default function BestPerformer({
 	const totalChange24h = bestPerformer?.price_change_percentage_24h || 0;
 	const isPositive = totalChange24h >= 0;
 
+	if (isPending) {
+		return (
+			<div className="space-y-4">
+				<Skeleton className="h-12 w-full" />
+				<div className="grid grid-cols-2 gap-4">
+					<Skeleton className="h-16 w-full" />
+				</div>
+			</div>
+		);
+	}
 	return (
 		<div className="space-y-6 flex items-center justify-between">
 			{/* main balance */}
@@ -54,9 +49,9 @@ export default function BestPerformer({
 				</div>
 				<div className="space-y-1">
 					<div className="flex items-center gap-2">
-						<TokenAvatar src={bestPerformer.image || ""} />
+						<TokenAvatar src={bestPerformer?.image || ""} />
 						<h1 className="text-xl font-bold text-foreground">
-							{bestPerformer.symbol}
+							{bestPerformer?.symbol}
 						</h1>
 						<div
 							className={`flex items-center justify-center gap-1 text-sm ${
@@ -81,4 +76,25 @@ export default function BestPerformer({
 			</div>
 		</div>
 	);
+}
+
+export default function BestPerformer() {
+	const { address } = useAccount();
+
+	const { data: walletBalances, isLoading } = useGetTotalBalances({
+		address: address as string,
+	});
+
+	if (isLoading) {
+		return (
+			<div className="space-y-4">
+				<Skeleton className="h-12 w-full" />
+				<div className="grid grid-cols-2 gap-4">
+					<Skeleton className="h-16 w-full" />
+				</div>
+			</div>
+		);
+	}
+
+	return <Performer walletBalances={walletBalances} />;
 }
