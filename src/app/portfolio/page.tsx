@@ -43,7 +43,7 @@ export default function PortfolioPage() {
 
 				<Card className="lg:col-span-1">
 					<CardContent>
-						<TotalAssets tokensByWallet={tokensByWallet} isLoading={false} />
+						<TotalAssets />
 					</CardContent>
 				</Card>
 

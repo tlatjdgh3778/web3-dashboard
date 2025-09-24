@@ -1,18 +1,17 @@
-import type { GetTokensByWalletResponse, Network } from "alchemy-sdk";
+"use client";
+
+import { useAccount } from "wagmi";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { useGetTokensByWallet } from "@/hooks/useGetTokensByWallet";
 
-export default function TotalAssets({
-	tokensByWallet,
-	isLoading,
-}: {
-	tokensByWallet: {
-		tokens: GetTokensByWalletResponse["data"]["tokens"];
-		networks: Network[];
-	};
-	isLoading: boolean;
-}) {
+export default function TotalAssets() {
+	const { address } = useAccount();
+	const { data: tokensByWallet, isLoading } = useGetTokensByWallet({
+		address: address as string,
+	});
+
 	if (isLoading) {
 		return (
 			<div className="space-y-4">
@@ -31,12 +30,12 @@ export default function TotalAssets({
 				<div className="flex w-full items-center justify-between gap-2 text-muted-foreground">
 					<span className="text-sm font-medium">Total Assets</span>
 					<Badge variant="outline">
-						{tokensByWallet.networks?.length || 0} networks
+						{tokensByWallet?.networks?.length || 0} networks
 					</Badge>
 				</div>
 				<div className="space-y-1">
 					<h1 className="text-3xl font-medium text-foreground">
-						{tokensByWallet.tokens?.length || 0}
+						{tokensByWallet?.tokens?.length || 0}
 					</h1>
 				</div>
 			</div>
