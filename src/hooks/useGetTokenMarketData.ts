@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { PriceChangePercentage } from "@/types/PriceChangePercentage";
+import type { TokenMarketData } from "@/types/TokenMarketData";
 
 /**
  * @description get token market data
@@ -15,7 +16,7 @@ const getTokenMarketData = async ({
 	time?: PriceChangePercentage;
 }) => {
 	const response = await fetch(
-		`https://pro-api.coingecko.com/api/v3/coins/markets?include_tokens=true&vs_currency=usd&symbols=${symbols.join(",")}&sparkline=true&price_change_percentage=${time}`,
+		`https://api.coingecko.com/api/v3/coins/markets?include_tokens=true&vs_currency=usd&symbols=${symbols.join(",")}&sparkline=true&price_change_percentage=${time}`,
 		{
 			cache: "force-cache",
 			headers: {
@@ -39,7 +40,7 @@ export const useGetTokenMarketData = ({
 		queryKey: ["token-market-data", symbols, time],
 		queryFn: () => getTokenMarketData({ symbols, time }),
 		select: (data) => {
-			return data;
+			return data as TokenMarketData[];
 		},
 	});
 };
