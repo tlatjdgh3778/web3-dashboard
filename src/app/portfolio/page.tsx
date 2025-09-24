@@ -37,7 +37,7 @@ export default function PortfolioPage() {
 			<div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
 				<Card className="lg:col-span-2">
 					<CardContent>
-						<TotalBalances walletBalances={walletBalances} isLoading={false} />
+						<TotalBalances />
 					</CardContent>
 				</Card>
 
