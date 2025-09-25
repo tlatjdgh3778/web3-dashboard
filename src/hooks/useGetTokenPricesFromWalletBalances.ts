@@ -8,7 +8,7 @@ export const useGetTokenPricesFromWalletBalances = ({
 	walletBalances: OwnedToken[];
 }) => {
 	const symbols = walletBalances
-		?.map((token) => token.symbol)
+		?.map((token) => token.symbol?.toLowerCase())
 		.filter(Boolean) as string[];
 
 	const { data: tokenPriceData, isLoading: isTokenQuotesLoading } =

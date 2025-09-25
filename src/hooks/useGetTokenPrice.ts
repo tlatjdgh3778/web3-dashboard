@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
  */
 const getTokenPrice = async ({ symbols }: { symbols: string[] }) => {
 	const response = await fetch(
-		`https://api.coingecko.com/api/v3/simple/price?include_tokens=true&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true&vs_currencies=usd&symbols=${symbols.join(",")}`,
+		`https://api.coingecko.com/api/v3/simple/price?include_tokens=top&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true&vs_currencies=usd&symbols=${symbols.join(",")}`,
 		{
 			cache: "force-cache",
 			headers: {

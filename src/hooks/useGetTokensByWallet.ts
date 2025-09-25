@@ -60,7 +60,7 @@ export const useGetTokensByWallet = ({
 									"0x0000000000000000000000000000000000000000000000000000000000000001",
 						)
 						.map((token) => {
-							if ((token as any)?.tokenAddress) {
+							if (!(token as any)?.tokenAddress) {
 								return {
 									...token,
 									tokenMetadata: {
@@ -69,6 +69,10 @@ export const useGetTokensByWallet = ({
 										name: "Ethereum",
 										symbol: "ETH",
 									},
+									tokenBalance: humanBalance(
+										token.tokenBalance,
+										token?.tokenMetadata?.decimals ?? 18,
+									),
 								};
 							}
 							return {
@@ -82,6 +86,7 @@ export const useGetTokensByWallet = ({
 				networks: [...new Set(data.data.tokens.map((token) => token.network))],
 			};
 		},
+		enabled: !!address,
 		...options,
 	});
 };
