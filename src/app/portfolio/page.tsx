@@ -1,7 +1,5 @@
 "use client";
 
-import { useAccount } from "wagmi";
-
 import {
 	Card,
 	CardContent,
@@ -12,24 +10,10 @@ import {
 
 import TotalBalances from "./components/total-balances/total-balances";
 import TotalAssets from "./components/total-assets/total-assets";
-import { mockTokensByWallet } from "@/mock/data/mockTokensByWallet";
 import BestPerformer from "./components/best-performer/best-performer";
 import AssetHoldings from "./components/asset-holdings/asset-holdings";
-// import { useGetTokensByWallet } from "@/hooks/useGetTokensByWallet";
 
 export default function PortfolioPage() {
-	const { address } = useAccount();
-	console.log(address);
-	// const { data: totalBalances } = useGetTotalBalances({
-	// 	address: address as string,
-	// });
-	// const { data: tokens } = useGetTokensByWallet({
-	// 	address: address as string,
-	// });
-
-	const tokensByWallet = mockTokensByWallet;
-	// console.log(tokens);
-
 	return (
 		<div className="flex flex-col flex-1 space-y-6">
 			<div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -57,7 +41,7 @@ export default function PortfolioPage() {
 					<CardDescription>Your current token holdings</CardDescription>
 				</CardHeader>
 				<CardContent className="pt-0">
-					<AssetHoldings tokensByWallet={tokensByWallet} />
+					<AssetHoldings />
 				</CardContent>
 			</Card>
 		</div>
