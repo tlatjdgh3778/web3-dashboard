@@ -1,9 +1,9 @@
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent } from "@/components/ui/card";
 
-import Transactions from "./transactions/transactions";
-import InternalTransactions from "./internal-transactions/internal-transactions";
-import Erc20 from "./erc-20/erc-20";
+import Transactions from "./components/transactions/transactions";
+import InternalTransactions from "./components/internal-transactions/internal-transactions";
+import Erc20 from "./components/erc-20/erc-20";
 
 export default function TransactionsPage() {
 	return (
