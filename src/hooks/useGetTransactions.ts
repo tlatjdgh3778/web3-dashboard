@@ -1,49 +1,49 @@
 import alchemy from "@/lib/alchemy";
 import {
-	AssetTransfersCategory,
-	type AssetTransfersWithMetadataParams,
+	type AssetTransfersWithMetadataResponse,
 	type AssetTransfersWithMetadataResult,
+	type AssetTransfersWithMetadataParams,
+	SortingOrder,
 } from "alchemy-sdk";
-import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import type { UseQueryOptions } from "@tanstack/react-query";
 
-async function fetchTransactions(params: AssetTransfersWithMetadataParams) {
-	const response = await alchemy.core.getAssetTransfers({
-		...params,
-		category: [
-			AssetTransfersCategory.EXTERNAL,
-			AssetTransfersCategory.INTERNAL,
-			AssetTransfersCategory.ERC20,
-			AssetTransfersCategory.ERC721,
-			AssetTransfersCategory.ERC1155,
-			AssetTransfersCategory.SPECIALNFT,
-		],
-		withMetadata: true,
-	});
+async function fetchAssetTransfers({
+	params,
+}: {
+	params: AssetTransfersWithMetadataParams;
+}) {
+	const response = await alchemy.core.getAssetTransfers(params);
 
-	return response.transfers;
+	return response;
 }
 
-export function useGetTransactions({
+/**
+ * @description get asset transfers
+ * @param params asset transfers params
+ * @param options query options
+ * @returns asset transfers
+ */
+export const useGetTransactions = ({
 	params,
 	options,
 }: {
 	params: AssetTransfersWithMetadataParams;
-	options?: UseQueryOptions<AssetTransfersWithMetadataResult[], Error>;
-}) {
+	options?: UseQueryOptions<
+		AssetTransfersWithMetadataResponse,
+		Error,
+		AssetTransfersWithMetadataResult[]
+	>;
+}) => {
 	return useQuery({
-		queryKey: ["sent-transfers", params],
-		queryFn: async () => fetchTransactions(params),
+		queryKey: ["asset-transfers", params],
+		queryFn: () =>
+			fetchAssetTransfers({
+				params: { ...params, order: SortingOrder.DESCENDING },
+			}),
 		select: (data) => {
-			const transfers = data as AssetTransfersWithMetadataResult[];
-
-			transfers.sort((a, b) => {
-				const blockDiff = Number(b.blockNum) - Number(a.blockNum);
-				if (blockDiff !== 0) return blockDiff;
-				return 0;
-			});
-
-			return transfers;
+			return data.transfers;
 		},
 		...options,
 	});
-}
+};
