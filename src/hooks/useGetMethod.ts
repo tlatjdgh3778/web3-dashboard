@@ -8,18 +8,18 @@ async function fetchMethod(hash: string) {
 }
 
 const methodMap: Record<string, string> = {
-	"0xa9059cbb": "transfer",
-	"0x095ea7b3": "approve",
-	"0x23b872dd": "transferFrom",
-	"0x5f575529": "zap",
-	"0x1249c58b": "mint",
-	"0x42966c68": "burn",
+	"0xa9059cbb": "Transfer",
+	"0x095ea7b3": "Approve",
+	"0x23b872dd": "Transfer From",
+	"0x5f575529": "Swap",
+	"0x1249c58b": "Mint",
+	"0x42966c68": "Burn",
 };
 
 function getTxTypeFromInput(input: string | undefined): string {
 	if (!input || input === "0x") return "Transfer (ETH)";
 	const selector = input.slice(0, 10).toLowerCase();
-	return methodMap[selector] || "Contract Interaction";
+	return methodMap[selector] || input.slice(0, 10);
 }
 
 export const useGetTransactionMethod = ({

@@ -18,12 +18,12 @@ async function fetchAssetTransfers({
 }
 
 /**
- * @description get ERC20 transfers
- * @param params ERC20 transfers params
+ * @description get ERC20 transactions
+ * @param params ERC20 transactions params
  * @param options query options
- * @returns ERC20 transfers
+ * @returns ERC20 transactions
  */
-export const useGetERC20Transfers = ({
+export const useGetERC20Transactions = ({
 	params,
 }: {
 	params: AssetTransfersWithMetadataParams;
@@ -31,7 +31,7 @@ export const useGetERC20Transfers = ({
 	return useQueries({
 		queries: [
 			{
-				queryKey: ["erc20-transfers-in", params],
+				queryKey: ["erc20-transactions-in", params],
 				queryFn: () =>
 					fetchAssetTransfers({
 						params: {
@@ -48,7 +48,7 @@ export const useGetERC20Transfers = ({
 				},
 			},
 			{
-				queryKey: ["erc20-transfers-out", params],
+				queryKey: ["erc20-transactions-out", params],
 				queryFn: () =>
 					fetchAssetTransfers({
 						params: {
@@ -66,16 +66,18 @@ export const useGetERC20Transfers = ({
 			},
 		],
 		combine: (results) => {
-			const inTransfers = results[0].data || [];
-			const outTransfers = results[1].data || [];
-			const sortedTransfers = [...inTransfers, ...outTransfers].sort((a, b) => {
-				return (
-					new Date(b.metadata.blockTimestamp).getTime() -
-					new Date(a.metadata.blockTimestamp).getTime()
-				);
-			});
+			const inTransactions = results[0].data || [];
+			const outTransactions = results[1].data || [];
+			const sortedTransactions = [...inTransactions, ...outTransactions].sort(
+				(a, b) => {
+					return (
+						new Date(b.metadata.blockTimestamp).getTime() -
+						new Date(a.metadata.blockTimestamp).getTime()
+					);
+				},
+			);
 			return {
-				data: sortedTransfers,
+				data: sortedTransactions,
 				isPending: results.some((result) => result.isPending),
 			};
 		},
