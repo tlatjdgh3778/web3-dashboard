@@ -2,8 +2,9 @@ import alchemy from "@/lib/alchemy";
 import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
 import type { TransactionResponse } from "alchemy-sdk";
 
-interface CustomTransactionResponse extends TransactionResponse {
-	input: string;
+async function fetchMethod(hash: string) {
+	const response = await alchemy.transact.getTransaction(hash);
+	return response;
 }
 
 const methodMap: Record<string, string> = {
@@ -26,21 +27,14 @@ export const useGetTransactionMethod = ({
 	options,
 }: {
 	hash: string;
-	options?: UseQueryOptions<
-		CustomTransactionResponse | null,
-		Error,
-		string | null
-	>;
+	options?: UseQueryOptions<TransactionResponse | null, Error, string | null>;
 }) => {
 	return useQuery({
 		queryKey: ["transaction", hash],
-		queryFn: () =>
-			alchemy.transact.getTransaction(
-				hash,
-			) as Promise<CustomTransactionResponse | null>,
+		queryFn: () => fetchMethod(hash),
 		select: (data) => {
 			if (!data) return null;
-			return getTxTypeFromInput(data.input);
+			return getTxTypeFromInput(data.data);
 		},
 		enabled: !!hash,
 		...options,
