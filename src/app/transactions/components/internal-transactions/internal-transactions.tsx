@@ -12,7 +12,7 @@ import { columns } from "./columns";
 export default function InternalTransactions() {
 	const { address } = useAccount();
 
-	const { data: assetTransfers, isLoading } = useGetTransactions({
+	const { data: assetTransfers, isPending } = useGetTransactions({
 		params: {
 			toAddress: address as string,
 			category: [AssetTransfersCategory.INTERNAL],
@@ -20,7 +20,7 @@ export default function InternalTransactions() {
 		},
 	});
 
-	if (isLoading) {
+	if (isPending) {
 		return <TableLoadingSkeleton />;
 	}
 

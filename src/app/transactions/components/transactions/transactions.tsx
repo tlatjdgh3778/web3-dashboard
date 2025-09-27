@@ -4,15 +4,15 @@ import { useAccount } from "wagmi";
 import { AssetTransfersCategory } from "alchemy-sdk";
 
 import { DataTable } from "@/components/common/data-table/data-table";
+import TableLoadingSkeleton from "@/components/common/data-table/table-loading-skeleton";
+import { useGetTransactions } from "@/hooks/useGetTransactions";
 
 import { columns } from "./columns";
-import { useGetTransactions } from "@/hooks/useGetTransactions";
-import TableLoadingSkeleton from "@/components/common/data-table/table-loading-skeleton";
 
 export default function Transactions() {
 	const { address } = useAccount();
 
-	const { data: transactions, isLoading } = useGetTransactions({
+	const { data: transactions, isPending } = useGetTransactions({
 		params: {
 			toAddress: address as string,
 			category: [
@@ -26,7 +26,7 @@ export default function Transactions() {
 		},
 	});
 
-	if (isLoading) {
+	if (isPending) {
 		return <TableLoadingSkeleton />;
 	}
 
