@@ -5,12 +5,11 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "@/components/common/data-table/table-header";
 import Timestamp from "@/components/common/timestamp";
-
-import { TransactionHash } from "./transaction-hash";
-import BlockNumber from "./block-number";
-import FromAddress from "./from-address";
-import ToAddress from "./to-address";
-import Method from "./method";
+import TransactionHash from "@/components/common/data-table-column/transaction-hash";
+import Method from "@/components/common/data-table-column/method";
+import BlockNumber from "@/components/common/data-table-column/block-number";
+import FromAddress from "@/components/common/data-table-column/from-address";
+import ToAddress from "@/components/common/data-table-column/to-address";
 
 export const columns: ColumnDef<AssetTransfersWithMetadataResult>[] = [
 	{
