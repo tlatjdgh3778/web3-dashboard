@@ -1,0 +1,26 @@
+{
+    "name": "Web3 Dashboard",
+    "short_name": "Web3 Dashboard",
+    "description": "A minimal Web3 portfolio tracker built with Next.js, wagmi, and RainbowKit.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0D0D0F",
+    "theme_color": "#6B4EFF",
+    "icons": [
+        {
+            "src": "/dashboard_icon_x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/dashboard_icon_x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/dashboard_icon_x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
